@@ -15,6 +15,7 @@ protected:
 	_Component::ComponentPool<T>* pPool = nullptr;
 
 public:
+	//Attach component pool to the operating system.
 	void AttachPool(_Component::ComponentPool<T>* poolPointer)
 	{
 		assert(poolPointer != nullptr && "Pointer is null!");

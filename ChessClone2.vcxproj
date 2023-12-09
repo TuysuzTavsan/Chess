@@ -151,6 +151,7 @@
     <ClCompile Include="Src\texture.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Headers\components\script.h" />
     <ClInclude Include="Headers\drawable2D.h" />
     <ClInclude Include="Headers\apl.h" />
     <ClInclude Include="Headers\ecs\component.h" />

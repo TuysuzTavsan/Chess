@@ -98,5 +98,8 @@
     <ClInclude Include="Headers\ecs\componentPool.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Headers\components\script.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

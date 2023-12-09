@@ -9,12 +9,15 @@
 
 namespace ECS
 {
+	//Register a component.
 	template<typename T>
 	auto RegisterComponent = _Component::RegisterComponent<T>;
 	
+	//ComponentPool is a data holder struct for a component.
 	template<typename T>
 	using ComponentPool = _Component::ComponentPool<T>;
 
+	//Create entity with empty signature.
 	auto CreateEntity = _Entity::CreateEntity;
 
 

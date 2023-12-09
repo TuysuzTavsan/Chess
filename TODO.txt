@@ -1,0 +1,7 @@
+Script system
+Scene system
+Sprite component
+button component
+animated sprite component
+text component
+Engine will load scripted entities to scenes, then run the scenes.

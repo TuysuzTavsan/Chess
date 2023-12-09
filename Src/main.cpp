@@ -1,91 +1,91 @@
 #include <apl.h>
-
 #include <ecs/ecs.h>
+#include <components/script.h>
 
-#include <text.h>
-#include <random>
-
-struct Transform
+class firstScript : public IScript
 {
-	float x;
-	float y;
-	float z;
-};
+public:
+	int count = 0;
 
-class RigidBody
-{
-	Vec3 position;
-	Vec3 rotation;
-	Vec3 scale;
-};
-
-struct mySystem : public System<Transform>
-{
-	void Operate()
+	void Instantiate() override
 	{
-		std::cout << "Updating transform system!\n";
-		int i = 1;
-		for (auto& x : pPool->pool)
-		{
-			//std::cout << "#" << i << "\t";
-			i++;
-			//std::cout << x.x << " " << x.y << " " << x.z << "\n";
-			x.x++;
-			x.y++;
-			x.z++;
-		}
+		std::cout << "Hello from the script!\n";
 	}
 
-	void Operate2()
+	void Update(const float& dt) override
 	{
-		std::cout << "Printing transform system!\n";
-		for (auto& x : pPool->pool)
-		{
-			std::cout << x.x << " " << x.y << " " << x.z << "\n";
+		count++;
+		std::cout << "Updating script!\t" << "#Frame# " << this->count << "\n";
+	}
 
+	void Free() override
+	{
+		std::cout << "Free called from the script! GOODBYE :( \n";
+	}
+};
+
+class ScriptSystem : public System<Script>
+{
+public:
+	void ScriptOnInit()
+	{
+		for (auto& script : this->pPool->pool)
+		{
+			script.funcInstantiate();
+		}
+	}
+	void ScriptOnUpdate(const float& dt)
+	{
+		for (auto& script : this->pPool->pool)
+		{
+			script.funcUpdate(dt);
+		}
+	}
+	void ScriptOnFree()
+	{
+		for (auto& script : this->pPool->pool)
+		{
+			script.funcFree();
 		}
 	}
 };
 
 int main()
 {
+	
+
 
 	if (!APL::Init()) 
 		return -1;
 
-	std::srand(13);
+	ECS::Entity myentity = ECS::CreateEntity();
 
-	mySystem system;
-	ECS::ComponentPool<Transform> pool;
+	ECS::RegisterComponent<Script>();
+	ECS::ComponentPool<Script> scriptPool;
+
 	
-	ECS::RegisterComponent<Transform>();
-	system.AttachPool(&pool);
 
-	for (int i = 0; i < 100; i++)
+	firstScript firstscript;
+	Script script = Scriptify(firstscript);
+	scriptPool.InsertComponent(myentity, script);
+	ScriptSystem scriptSystem;
+	scriptSystem.AttachPool(&scriptPool);
+
+	scriptSystem.ScriptOnInit();
+
+	for (int i = 0; i < 50; i++)
+
 	{
-		auto entity = ECS::CreateEntity();
-
-		Transform transformC{ 
-			static_cast<float>(std::rand()),
-			static_cast<float>(std::rand()),
-			static_cast<float>(std::rand()) };
-
-		pool.InsertComponent(entity, transformC);
+		scriptSystem.ScriptOnUpdate(13);
 	}
+	
+	scriptSystem.ScriptOnFree();
 
-	int i = 0;
-	for (i = 0; i < 1000; i++)
-	{
-		system.Operate();
-		
-	}
 
-	std::cout << "Operated #" << i << " times.\n";
+	
+
 
 	APL::Run();
-
-	
-
 
 
 	APL::Terminate();
