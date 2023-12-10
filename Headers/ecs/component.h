@@ -2,6 +2,7 @@
 #define COMPONENT_H
 
 #include <iostream>
+#include <sstream>
 #include <assert.h>
 #include <map>
 #include <vector>
@@ -18,6 +19,9 @@ namespace _Component
 
 	//List of defined components.
 	std::map<std::string, ComponentID> ComponentList;
+	std::map<ComponentID, IComponentPool*> ComponentPoolReacher;
+
+
 
 	//Check if the component is already defined via RegisterComponent.
 	template<typename T>
@@ -28,13 +32,29 @@ namespace _Component
 
 	//Register a component.
 	template<typename T>
-	void RegisterComponent()
+	void RegisterComponent(IComponentPool* componentPool)
 	{
 		std::string str(type_name<T>());
 		assert(ID + 1 < MAX_COMPONENT && "Too much components!");
 		assert(IsComponentDefined<T>() && "Component already registered!");
 		ComponentID id = ++ID;;
+		ComponentPoolReacher.insert({ id, componentPool });
 		ComponentList.insert({ str,id });
+	}
+
+	void FreeComponent(const Entity& entity, const ComponentID& id)
+	{
+		assert(ComponentPoolReacher.find(id) != ComponentPoolReacher.end() && "Can not find componentPool to Free!");
+
+		auto x = (ComponentPoolReacher.find(id)->second);
+		x->EraseComponent(entity);
+	}
+
+	//Get a specified componentPool by a pointer.
+	IComponentPool* GetPool(ComponentID id)
+	{
+		assert(ComponentPoolReacher.find(id) != ComponentPoolReacher.end() && "Can not find Pool!");
+		return ComponentPoolReacher.find(id)->second;
 	}
 
 	//Get component name by ComponentID.

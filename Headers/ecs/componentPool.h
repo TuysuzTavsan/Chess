@@ -15,7 +15,7 @@ namespace _Component
 * Data is contigous, however ordering is not promised!
 */
 	template<typename T>
-	struct ComponentPool
+	struct ComponentPool : IComponentPool
 	{
 		using Index = uint32_t; //Type alias.
 		Index counter; //Counter to count last component index on the pool.
@@ -47,7 +47,7 @@ namespace _Component
 		* Hole in the pool will be filled with the last element on the pool.
 		* Therefore contigous data on the pool is guarenteed.
 		*/
-		void EraseComponent(_Entity::Entity entity)
+		void EraseComponent(const Entity& entity) override
 		{
 			assert(_Entity::LivingEntites.find(entity) != _Entity::LivingEntites.end()
 				&& EntityToIndex.find(entity) != EntityToIndex.end()
@@ -74,17 +74,16 @@ namespace _Component
 		* Get the component data that an entity has.
 		* Warning: This function will return a reference to component data.
 		*/
-		T& GetComponent(_Entity::Entity entity)
+		void* GetComponent(const Entity& entity) override
 		{
 			assert(_Entity::LivingEntites.find(entity) != _Entity::LivingEntites.end()
 				&& EntityToIndex.find(entity) != EntityToIndex.end()
 				&& "Entity does not exist or does not have specified component!");
 
 			Index index = EntityToIndex.find(entity)->second;
-			return pool[index - 1];
+			return &pool[index - 1];
 
 		}
-
 	};
 }
 

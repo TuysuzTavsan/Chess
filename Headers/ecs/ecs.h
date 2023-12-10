@@ -17,9 +17,35 @@ namespace ECS
 	template<typename T>
 	using ComponentPool = _Component::ComponentPool<T>;
 
+	void FreeEntity(const Entity& entity)
+	{
+		assert(_Entity::LivingEntites.find(entity) != _Entity::LivingEntites.end() 
+			&& "Can not find entity to free.");
+		Signature sign = _Entity::LivingEntites.find(entity)->second;
+
+		for (int i = 0; i < MAX_COMPONENT; i++)
+		{
+			if (sign.test(i))
+			{
+				_Component::FreeComponent(entity, i);
+			}
+		}
+
+		_Entity::LivingEntites.erase(entity);
+
+
+	}
+
 	//Create entity with empty signature.
 	auto CreateEntity = _Entity::CreateEntity;
 
+	//Get a entity's component by a reference.
+	template<typename T>
+	T* GetComponent(const Entity& entity)
+	{
+		IComponentPool* pPool = _Component::GetPool(_Component::GetComponentID(type_name<T>()));
+		return (T*)(pPool->GetComponent(entity));
+	}
 
 	//Add a component to specified entity's signature by type.
 	template<typename T>

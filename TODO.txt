@@ -5,3 +5,7 @@ button component
 animated sprite component
 text component
 Engine will load scripted entities to scenes, then run the scenes.
+
+
+
+script system needs to run on scripts and instantiates them? Maybe a seperate manager that works with scenes?

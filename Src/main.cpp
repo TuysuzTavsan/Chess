@@ -2,7 +2,16 @@
 #include <ecs/ecs.h>
 #include <components/script.h>
 
-class firstScript : public IScript
+
+
+struct Transform
+{
+	float x, y, z;
+};
+
+System<Transform> transformSystem;
+
+class firstScript : public Scriptable
 {
 public:
 	int count = 0;
@@ -10,10 +19,21 @@ public:
 	void Instantiate() override
 	{
 		std::cout << "Hello from the script!\n";
+		transformSystem.InsertComponent(instance, Transform());
+		auto temp = ECS::GetComponent<Transform>(instance);
+		std::cout << "Transform component: X: " << temp->x << " Y: " << temp->y << " Z: " 
+			<< temp->z << "\n";
+		
 	}
 
 	void Update(const float& dt) override
 	{
+
+		auto temp = ECS::GetComponent<Transform>(instance);
+		temp->x++;
+		temp->y++;
+		temp->z++;
+
 		count++;
 		std::cout << "Updating script!\t" << "#Frame# " << this->count << "\n";
 	}
@@ -21,34 +41,14 @@ public:
 	void Free() override
 	{
 		std::cout << "Free called from the script! GOODBYE :( \n";
+		auto temp = ECS::GetComponent<Transform>(instance);
+		std::cout << "Transform component: X: " << temp->x << " Y: " << temp->y << " Z: " 
+			<< temp->z << "\n";
+
 	}
 };
 
-class ScriptSystem : public System<Script>
-{
-public:
-	void ScriptOnInit()
-	{
-		for (auto& script : this->pPool->pool)
-		{
-			script.funcInstantiate();
-		}
-	}
-	void ScriptOnUpdate(const float& dt)
-	{
-		for (auto& script : this->pPool->pool)
-		{
-			script.funcUpdate(dt);
-		}
-	}
-	void ScriptOnFree()
-	{
-		for (auto& script : this->pPool->pool)
-		{
-			script.funcFree();
-		}
-	}
-};
+
 
 int main()
 {
@@ -57,19 +57,14 @@ int main()
 
 	if (!APL::Init()) 
 		return -1;
-
-	ECS::Entity myentity = ECS::CreateEntity();
-
-	ECS::RegisterComponent<Script>();
-	ECS::ComponentPool<Script> scriptPool;
-
 	
-
 	firstScript firstscript;
-	Script script = Scriptify(firstscript);
-	scriptPool.InsertComponent(myentity, script);
+	ScriptComponent script;
+	script.Scriptify(firstscript);
 	ScriptSystem scriptSystem;
-	scriptSystem.AttachPool(&scriptPool);
+	scriptSystem.PushBack(script);
+
+	scriptSystem.Instantiate();
 
 	scriptSystem.ScriptOnInit();
 
@@ -80,7 +75,7 @@ int main()
 	}
 	
 	scriptSystem.ScriptOnFree();
-
+	scriptSystem.Free();
 
 	
 
