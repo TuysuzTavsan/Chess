@@ -15,11 +15,11 @@ namespace _Component
 	using namespace ECS;
 
 	//Counter to give ID to component types.
-	uint16_t ID = 0;
+	inline uint16_t ID = 0;
 
 	//List of defined components.
-	std::map<std::string, ComponentID> ComponentList;
-	std::map<ComponentID, IComponentPool*> ComponentPoolReacher;
+	inline std::map<std::string, ComponentID> ComponentList;
+	inline std::map<ComponentID, IComponentPool*> ComponentPoolReacher;
 
 
 

@@ -110,8 +110,9 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)Dependencies\Include\freetype2\;$(ProjectDir)Dependencies\Include\;$(ProjectDir)Headers\;$(ProjectDir)Headers\Types\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Dependencies\Include\freetype2\;$(ProjectDir)Dependencies\Include\;$(ProjectDir)Headers\;$(ProjectDir)Headers\Types\;$(ProjectDir)ChessCode\Include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -128,7 +129,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)Dependencies\Include\freetype2\;$(ProjectDir)Dependencies\Include\;$(ProjectDir)Headers\;$(ProjectDir)Headers\Types\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Dependencies\Include\freetype2\;$(ProjectDir)Dependencies\Include\;$(ProjectDir)Headers\;$(ProjectDir)Headers\Types\;$(ProjectDir)ChessCode\Include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
@@ -151,7 +152,10 @@
     <ClCompile Include="Src\texture.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ChessCode\Include\firstscript.h" />
+    <ClInclude Include="Headers\components\mesh.h" />
     <ClInclude Include="Headers\components\script.h" />
+    <ClInclude Include="Headers\components\scriptable.h" />
     <ClInclude Include="Headers\drawable2D.h" />
     <ClInclude Include="Headers\apl.h" />
     <ClInclude Include="Headers\ecs\component.h" />
@@ -159,11 +163,14 @@
     <ClInclude Include="Headers\ecs\ecs.h" />
     <ClInclude Include="Headers\ecs\ecsTypes.h" />
     <ClInclude Include="Headers\ecs\entity.h" />
+    <ClInclude Include="Headers\ecs\scriptSystem.h" />
     <ClInclude Include="Headers\ecs\type_name.h" />
     <ClInclude Include="Headers\ecs\system.h" />
     <ClInclude Include="Headers\Header.h" />
     <ClInclude Include="Headers\observer.h" />
+    <ClInclude Include="Headers\platform.h" />
     <ClInclude Include="Headers\rectangle.h" />
+    <ClInclude Include="Headers\scene\scene.h" />
     <ClInclude Include="Headers\shader.h" />
     <ClInclude Include="Headers\text.h" />
     <ClInclude Include="Headers\texture.h" />

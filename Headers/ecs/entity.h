@@ -15,9 +15,9 @@ namespace _Entity
 	using namespace ECS;
 
 	//Counter to give entities number.
-	uint32_t ID = 0;
+	inline uint32_t ID = 0;
 	//Map of currently alive entites and their signatures.
-	std::map<Entity, Signature> LivingEntites;
+	inline std::map<Entity, Signature> LivingEntites;
 
 	//Create entity with empty signature and return it.
 	Entity CreateEntity()
