@@ -33,7 +33,8 @@ namespace _Component
 		* Insert the data to the pool.
 		* Increase the counter by 1.
 		*/
-		void InsertComponent(_Entity::Entity entity, const T& component)
+		template<typename T>
+		void AddComponent(_Entity::Entity entity, T component) override
 		{
 			assert((counter + 1) < MAX_ENTITES && "Pool is full!");
 			pool.push_back(component);

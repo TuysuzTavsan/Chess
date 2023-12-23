@@ -20,6 +20,7 @@ namespace ECS
 	//EntityPair {Entity, Signature} is a helper type alias to use in map.
 	using EntityPair = std::pair<Entity, Signature>;
 
+
 	struct IComponentPool
 	{
 		virtual ~IComponentPool() = default;

@@ -20,6 +20,7 @@ public:
 	{
 		_Component::RegisterComponent<T>(&this->componentPool);
 	}
+
 	//Attach component pool to the operating system.
 	/*void AttachPool(_Component::ComponentPool<T>* poolPointer)
 	{
@@ -33,7 +34,7 @@ public:
 
 	void InsertComponent(_Entity::Entity entity, const T& component)
 	{
-		componentPool.InsertComponent(entity, component);
+		componentPool.AddComponent(entity, component);
 	}
 
 	

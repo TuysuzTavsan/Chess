@@ -1,11 +1,13 @@
 #pragma once
 
 #include <components/scriptable.h>
+#include <components/mesh.h>
 
 class firstScript : public Scriptable
 {
 	virtual void Instantiate() override
 	{
+		ECS::RegisterComponent<Mesh>(this->instance, Mesh{ 1,2,3 });
 		std::cout << "Hello Script\n";
 	}
 

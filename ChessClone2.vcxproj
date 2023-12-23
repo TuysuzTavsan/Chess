@@ -143,6 +143,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Dependencies\Include\glad.c" />
+    <ClCompile Include="Headers\newECS\ECSManager.cpp" />
+    <ClCompile Include="Headers\newECS\EntityManager.cpp" />
+    <ClCompile Include="Headers\newECS\ComponentManager.cpp" />
+    <ClCompile Include="Headers\newECS\SystemManager.cpp" />
     <ClCompile Include="Src\apl.cpp" />
     <ClCompile Include="Src\drawable2D.cpp" />
     <ClCompile Include="Src\main.cpp" />
@@ -158,15 +162,13 @@
     <ClInclude Include="Headers\components\scriptable.h" />
     <ClInclude Include="Headers\drawable2D.h" />
     <ClInclude Include="Headers\apl.h" />
-    <ClInclude Include="Headers\ecs\component.h" />
-    <ClInclude Include="Headers\ecs\componentPool.h" />
-    <ClInclude Include="Headers\ecs\ecs.h" />
-    <ClInclude Include="Headers\ecs\ecsTypes.h" />
-    <ClInclude Include="Headers\ecs\entity.h" />
-    <ClInclude Include="Headers\ecs\scriptSystem.h" />
-    <ClInclude Include="Headers\ecs\type_name.h" />
-    <ClInclude Include="Headers\ecs\system.h" />
     <ClInclude Include="Headers\Header.h" />
+    <ClInclude Include="Headers\newECS\ComponentManager.h" />
+    <ClInclude Include="Headers\newECS\ComponentPool.h" />
+    <ClInclude Include="Headers\newECS\ECSManager.h" />
+    <ClInclude Include="Headers\newECS\System.h" />
+    <ClInclude Include="Headers\newECS\SystemManager.h" />
+    <ClInclude Include="Headers\newECS\type_name.h" />
     <ClInclude Include="Headers\observer.h" />
     <ClInclude Include="Headers\platform.h" />
     <ClInclude Include="Headers\rectangle.h" />
@@ -178,6 +180,8 @@
     <ClInclude Include="Headers\Types\matrix.h" />
     <ClInclude Include="Headers\Types\ptr.h" />
     <ClInclude Include="Headers\Types\vector.h" />
+    <ClInclude Include="Headers\newECS\EntityManager.h" />
+    <ClInclude Include="Headers\newECS\necsTypes.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

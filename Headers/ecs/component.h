@@ -22,7 +22,6 @@ namespace _Component
 	inline std::map<ComponentID, IComponentPool*> ComponentPoolReacher;
 
 
-
 	//Check if the component is already defined via RegisterComponent.
 	template<typename T>
 	bool IsComponentDefined()
@@ -101,7 +100,6 @@ namespace _Component
 		auto pair = ComponentList.find(type.data());
 		std::cout << "ID: " << pair->second << "\tName: " << pair->first << "\n";
 	}
-
 
 }// namespace Component
 
