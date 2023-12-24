@@ -1,5 +1,5 @@
 #pragma once
-#include <newECS/necsTypes.h>
+#include <ecs/ecsTypes.h>
 #include <vector>
 #include <map>
 #include <assert.h>

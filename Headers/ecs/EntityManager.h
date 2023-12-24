@@ -1,6 +1,6 @@
 #pragma once
 
-#include <newECS/necsTypes.h>
+#include <ecs/ecsTypes.h>
 
 #include <map>
 

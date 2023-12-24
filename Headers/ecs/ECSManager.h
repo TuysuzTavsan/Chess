@@ -1,9 +1,9 @@
 #pragma once
 
-#include <newECS/necsTypes.h>
-#include <newECS/EntityManager.h>
-#include <newECS/ComponentPool.h>
-#include <newECS/ComponentManager.h>
+#include <ecs/ecsTypes.h>
+#include <ecs/EntityManager.h>
+#include <ecs/ComponentPool.h>
+#include <ecs/ComponentManager.h>
 
 //Singleton ECSManager class that manages all ECS system.
 class ECSManager 

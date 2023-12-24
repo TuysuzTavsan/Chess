@@ -110,7 +110,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)Dependencies\Include\freetype2\;$(ProjectDir)Dependencies\Include\;$(ProjectDir)Headers\;$(ProjectDir)Headers\Types\;$(ProjectDir)ChessCode\Include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Dependencies\Include\freetype2\;$(ProjectDir)Dependencies\Include\;$(ProjectDir)Headers\;$(ProjectDir)Headers\Types\;$(ProjectDir)GameCode;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
@@ -129,7 +129,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)Dependencies\Include\freetype2\;$(ProjectDir)Dependencies\Include\;$(ProjectDir)Headers\;$(ProjectDir)Headers\Types\;$(ProjectDir)ChessCode\Include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Dependencies\Include\freetype2\;$(ProjectDir)Dependencies\Include\;$(ProjectDir)Headers\;$(ProjectDir)Headers\Types\;$(ProjectDir)GameCode;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
@@ -143,9 +143,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Dependencies\Include\glad.c" />
-    <ClCompile Include="Headers\newECS\ECSManager.cpp" />
-    <ClCompile Include="Headers\newECS\EntityManager.cpp" />
-    <ClCompile Include="Headers\newECS\ComponentManager.cpp" />
+    <ClCompile Include="Headers\ecs\ECSManager.cpp" />
+    <ClCompile Include="Headers\ecs\EntityManager.cpp" />
+    <ClCompile Include="Headers\ecs\ComponentManager.cpp" />
     <ClCompile Include="Src\apl.cpp" />
     <ClCompile Include="Src\drawable2D.cpp" />
     <ClCompile Include="Src\main.cpp" />
@@ -155,19 +155,23 @@
     <ClCompile Include="Src\texture.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ChessCode\Include\firstscript.h" />
-    <ClInclude Include="Headers\components\mesh.h" />
+    <ClInclude Include="GameCode\Chess\firstscript.h" />
+    <ClInclude Include="GameCode\Chess\clientSystems.h" />
+    <ClInclude Include="GameCode\Chess\clientComponents.h" />
+    <ClInclude Include="GameCode\Chess\renderSystem.h" />
+    <ClInclude Include="GameCode\Chess\scene1.h" />
     <ClInclude Include="Headers\components\script.h" />
-    <ClInclude Include="Headers\components\scriptable.h" />
+    <ClInclude Include="Headers\ecs\SystemManager.h" />
+    <ClInclude Include="Headers\scriptable.h" />
+    <ClInclude Include="Headers\components\sprite.h" />
     <ClInclude Include="Headers\drawable2D.h" />
     <ClInclude Include="Headers\apl.h" />
-    <ClInclude Include="Headers\Header.h" />
-    <ClInclude Include="Headers\newECS\ComponentManager.h" />
-    <ClInclude Include="Headers\newECS\ComponentPool.h" />
-    <ClInclude Include="Headers\newECS\ECSManager.h" />
-    <ClInclude Include="Headers\newECS\System.h" />
-    <ClInclude Include="Headers\newECS\type_name.h" />
-    <ClInclude Include="Headers\newScene\scene.h" />
+    <ClInclude Include="Headers\ecs\ComponentManager.h" />
+    <ClInclude Include="Headers\ecs\ComponentPool.h" />
+    <ClInclude Include="Headers\ecs\ECSManager.h" />
+    <ClInclude Include="Headers\ecs\System.h" />
+    <ClInclude Include="Headers\ecs\type_name.h" />
+    <ClInclude Include="Headers\scene.h" />
     <ClInclude Include="Headers\observer.h" />
     <ClInclude Include="Headers\platform.h" />
     <ClInclude Include="Headers\rectangle.h" />
@@ -178,8 +182,8 @@
     <ClInclude Include="Headers\Types\matrix.h" />
     <ClInclude Include="Headers\Types\ptr.h" />
     <ClInclude Include="Headers\Types\vector.h" />
-    <ClInclude Include="Headers\newECS\EntityManager.h" />
-    <ClInclude Include="Headers\newECS\necsTypes.h" />
+    <ClInclude Include="Headers\ecs\EntityManager.h" />
+    <ClInclude Include="Headers\ecs\ecsTypes.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

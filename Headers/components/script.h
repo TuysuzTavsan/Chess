@@ -2,7 +2,7 @@
 #define SCRIPT_COMPONENT
 
 #include <functional>
-#include <components/scriptable.h>
+#include <scriptable.h>
 
 struct Script
 {

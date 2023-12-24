@@ -1,12 +1,13 @@
 #pragma once
 
-#include <newECS/necsTypes.h>
+#include <ecs/type_name.h>
+#include <ecs/ecsTypes.h>
 #include <map>
 #include <vector>
 
 #include <assert.h>
 #include <iostream>
-#include <newECS/ComponentPool.h>
+#include <ecs/ComponentPool.h>
 
 class ComponentManager
 {

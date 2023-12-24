@@ -39,13 +39,13 @@
     <ClCompile Include="Src\apl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Headers\newECS\EntityManager.cpp">
+    <ClCompile Include="Headers\ecs\EntityManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Headers\newECS\ComponentManager.cpp">
+    <ClCompile Include="Headers\ecs\ComponentManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Headers\newECS\ECSManager.cpp">
+    <ClCompile Include="Headers\ecs\ECSManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -83,46 +83,58 @@
     <ClInclude Include="Headers\apl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Headers\Header.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Headers\components\script.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Headers\components\mesh.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Headers\components\scriptable.h">
+    <ClInclude Include="Headers\scriptable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Headers\platform.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ChessCode\Include\firstscript.h">
+    <ClInclude Include="GameCode\Chess\firstscript.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Headers\newECS\necsTypes.h">
+    <ClInclude Include="Headers\ecs\ecsTypes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Headers\newECS\EntityManager.h">
+    <ClInclude Include="Headers\ecs\EntityManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Headers\newECS\ComponentManager.h">
+    <ClInclude Include="Headers\ecs\ComponentManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Headers\newECS\ComponentPool.h">
+    <ClInclude Include="Headers\ecs\ComponentPool.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Headers\newECS\ECSManager.h">
+    <ClInclude Include="Headers\ecs\ECSManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Headers\newECS\type_name.h">
+    <ClInclude Include="Headers\ecs\type_name.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Headers\newECS\System.h">
+    <ClInclude Include="Headers\ecs\System.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Headers\newScene\scene.h">
+    <ClInclude Include="Headers\scene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameCode\Chess\renderSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Headers\components\sprite.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameCode\Chess\scene1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameCode\Chess\clientComponents.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Headers\ecs\SystemManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameCode\Chess\clientSystems.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

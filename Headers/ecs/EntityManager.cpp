@@ -1,4 +1,4 @@
-#include <newECS/EntityManager.h>
+#include <ecs/EntityManager.h>
 
 #include <assert.h>
 

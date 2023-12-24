@@ -1,4 +1,4 @@
-#include <newECS/ECSManager.h>
+#include <ecs/ECSManager.h>
 
 ECSManager* ECSManager::Instance = nullptr;
 

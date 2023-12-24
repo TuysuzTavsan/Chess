@@ -4,7 +4,8 @@
 #include <Types/matrix.h>
 #include <Types/vector.h>
 #include <glfw/glfw3.h>
-
+#include <scene.h>
+#include <ecs/SystemManager.h>
 
 /*
 Application name space which holds information and functions related to app.
@@ -20,10 +21,20 @@ namespace APL
 	extern Mat4x4 Ortho; // Orthographic matrix which used in 2D shaders.
 	extern const char* WindowTitle; // Title of the window.
 	extern GLFWwindow* window; // GLFW window object.
-
+	extern SceneManager* sceneManager;
+	extern SystemManager* systemManager;
 	
 	//Initiliaze window and other minor stuff.
 	bool Init();
+
+	//Initiliaze scenes.
+	void InitScenes();
+
+	//Register all needed component parts.
+	void RegisterComponents();
+
+	//Get the system from client.
+	void RegisterSystems();
 
 	//Framebuffer callback function.
 	void framebuffer_size_callback(GLFWwindow* window, int width, int height);
@@ -52,6 +63,7 @@ namespace APL
 
 	//Terminate application.
 	void Terminate();
+
 
 }
 

@@ -1,8 +1,8 @@
-#include <newECS/ComponentManager.h>
-#include <newECS/type_name.h>
+#include <ecs/ComponentManager.h>
+#include <ecs/type_name.h>
 #include <assert.h>
 #include <iostream>
-#include <newECS/ComponentPool.h>
+#include <ecs/ComponentPool.h>
 
 ComponentManager::ComponentManager()
 {

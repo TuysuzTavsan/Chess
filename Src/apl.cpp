@@ -2,10 +2,11 @@
 #include <iostream>
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb/stb_image.h>
-#include <rectangle.h>
-#include <Types/color.h>
-#include <observer.h>
-#include <text.h>
+
+#include <Chess/scene1.h>
+#include <Chess/clientComponents.h>
+#include <Chess/clientSystems.h>
+
 
 //Declaration of variables from Application namespace.
 namespace APL 
@@ -17,6 +18,8 @@ namespace APL
 	Mat4x4 Ortho;
 	const char* WindowTitle = "Chess";
 	GLFWwindow* window = nullptr;
+	SceneManager* sceneManager = new SceneManager;
+	SystemManager* systemManager = new SystemManager;
 }
 
 
@@ -61,8 +64,30 @@ bool APL::Init()
 									 (float)APL::WINDOW_HEIGHT, -1.0f, 1000.0f);
 
 
+	RegisterComponents();
+	RegisterSystems();
+	InitScenes();
+
+	sceneManager->ReadyScenes();
+
 	return true;
 };
+
+void APL::InitScenes()
+{
+	Scene* scene1 = InitScene1();
+	sceneManager->AddScene(scene1);
+}
+
+void APL::RegisterComponents()
+{
+	RegisterClientComponents(ECSManager::getManager());
+}
+
+void APL::RegisterSystems()
+{
+	SetClientSystems(systemManager);
+}
 
 bool APL::load_img(const char* path, unsigned int& texture, int format)
 {
@@ -125,18 +150,21 @@ void APL::SetDelta()
 void APL::Run()
 {
 
-	Text text;
-	text.SetText("Nix go brrrrrrr!");
+
 
 	while (!glfwWindowShouldClose(APL::window))
 	{
-
 		SetDelta();
+
+
+		sceneManager->Play(APL::deltaTime);
+		systemManager->Update(APL::deltaTime);
+
+
 
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		text.Render();
 
 		glfwSwapBuffers(APL::window);
 
@@ -147,5 +175,6 @@ void APL::Run()
 
 void APL::Terminate()
 {
+	delete sceneManager;
 	glfwTerminate();
 }

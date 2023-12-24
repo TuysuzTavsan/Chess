@@ -2,7 +2,11 @@
 #define SCENE_H
 
 #include <components/script.h>
-#include <newECS/ECSManager.h>
+#include <ecs/ECSManager.h>
+
+#define NEW_SCENE(x) Scene* x = new Scene
+#define ADD_SCRIPT(scene, script) scene->AddScript(new Script(new script))
+#define RETURN_SCENE(x) return x
 
 struct Scene
 {
@@ -107,7 +111,7 @@ public:
 		}
 	}
 
-	void Play()
+	void Play(const float& dt)
 	{
 		assert(active < scenes.size() && "Playing null scene!");
 		if (!isReady)
@@ -117,7 +121,7 @@ public:
 		}
 		if (!shouldEnd)
 		{
-			scenes[active]->ScriptOnUpdate(13.0);
+			scenes[active]->ScriptOnUpdate(dt);
 		}
 		
 		
