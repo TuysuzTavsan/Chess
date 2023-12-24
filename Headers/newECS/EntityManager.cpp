@@ -34,7 +34,7 @@ void EntityManager::FreeEntity(Entity entity)
 
 void EntityManager::SetSignature(Entity entity, ComponentID ID, bool val)
 {
-	Signature sign = GetSignature(entity);
+	Signature& sign = GetSignature(entity);
 	sign.set(ID, val);
 }
 
@@ -43,4 +43,14 @@ Signature& EntityManager::GetSignature(Entity entity)
 	assert(LivingEntites.find(entity) != LivingEntites.end() && "Entity not found!");
 
 	return LivingEntites.find(entity)->second;
+}
+
+bool EntityManager::HasEntity(Entity entity)
+{
+	return (LivingEntites.find(entity) != LivingEntites.end());
+}
+
+bool EntityManager::HasComponent(Entity entity, ComponentID id)
+{
+	return (LivingEntites.find(entity)->second.test(id));
 }

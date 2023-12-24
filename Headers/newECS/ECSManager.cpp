@@ -1,5 +1,7 @@
 #include <newECS/ECSManager.h>
 
+ECSManager* ECSManager::Instance = nullptr;
+
 ECSManager::ECSManager()
 {
 
@@ -8,6 +10,16 @@ ECSManager::ECSManager()
 ECSManager::~ECSManager()
 {
 
+}
+
+ECSManager* ECSManager::getManager()
+{
+	if (Instance == nullptr)
+	{
+		Instance = new ECSManager;
+	}
+
+	return Instance;
 }
 
 Entity ECSManager::CreateEntity()
@@ -33,22 +45,3 @@ void ECSManager::FreeEntity(Entity entity)
 
 	entityManager.FreeEntity(entity);
 }
-
-//template<typename T>
-//void ECSManager::InsertComponent(Entity entity, T compData)
-//{
-//	componentManager.AddComponent<T>(entity, compData);
-//	entityManager.SetSignature(entity, componentManager.GetComponentID<T>(), true);
-//}
-//
-//template<typename T>
-//void ECSManager::RegisterComponent()
-//{
-//	componentManager.RegisterComponent<T>();
-//}
-//
-//template<typename T>
-//T& ECSManager::GetComponentData(Entity entity)
-//{
-//	return componentManager.GetComponentData<T>(entity);
-//}

@@ -48,9 +48,6 @@
     <ClCompile Include="Headers\newECS\ECSManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Headers\newECS\SystemManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Headers\Types\color.h">
@@ -92,9 +89,6 @@
     <ClInclude Include="Headers\components\script.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Headers\scene\scene.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Headers\components\mesh.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -128,7 +122,7 @@
     <ClInclude Include="Headers\newECS\System.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Headers\newECS\SystemManager.h">
+    <ClInclude Include="Headers\newScene\scene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

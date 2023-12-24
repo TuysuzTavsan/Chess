@@ -1,2 +1,0 @@
-#include <newECS/SystemManager.h>
-

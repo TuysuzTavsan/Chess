@@ -16,8 +16,11 @@ public:
 	void FreeEntity(Entity entity);
 	void SetSignature(Entity entity,ComponentID ID, bool set);
 	Signature& GetSignature(Entity entity);
+	bool HasEntity(Entity entity);
+	bool HasComponent(Entity entity, ComponentID id);
 
 private:
+
 
 	//Counter to give entities number.
 	uint32_t ID = 0;

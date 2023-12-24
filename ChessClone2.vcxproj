@@ -146,7 +146,6 @@
     <ClCompile Include="Headers\newECS\ECSManager.cpp" />
     <ClCompile Include="Headers\newECS\EntityManager.cpp" />
     <ClCompile Include="Headers\newECS\ComponentManager.cpp" />
-    <ClCompile Include="Headers\newECS\SystemManager.cpp" />
     <ClCompile Include="Src\apl.cpp" />
     <ClCompile Include="Src\drawable2D.cpp" />
     <ClCompile Include="Src\main.cpp" />
@@ -167,12 +166,11 @@
     <ClInclude Include="Headers\newECS\ComponentPool.h" />
     <ClInclude Include="Headers\newECS\ECSManager.h" />
     <ClInclude Include="Headers\newECS\System.h" />
-    <ClInclude Include="Headers\newECS\SystemManager.h" />
     <ClInclude Include="Headers\newECS\type_name.h" />
+    <ClInclude Include="Headers\newScene\scene.h" />
     <ClInclude Include="Headers\observer.h" />
     <ClInclude Include="Headers\platform.h" />
     <ClInclude Include="Headers\rectangle.h" />
-    <ClInclude Include="Headers\scene\scene.h" />
     <ClInclude Include="Headers\shader.h" />
     <ClInclude Include="Headers\text.h" />
     <ClInclude Include="Headers\texture.h" />

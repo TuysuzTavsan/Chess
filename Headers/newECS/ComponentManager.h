@@ -19,7 +19,7 @@ public:
 	template<typename T>
 	bool IsComponentDefined()
 	{
-		return (ComponentList.find(std::string(type_name<T>())) == ComponentList.end());
+		return (ComponentList.find(std::string(type_name<T>())) != ComponentList.end());
 	}
 
 	//Register a component.
@@ -28,7 +28,7 @@ public:
 	{
 		std::string str(type_name<T>());
 		assert(ID + 1 < MAX_COMPONENT && "Too much components!");
-		assert(IsComponentDefined<T>() && "Component already registered!");
+		assert(!IsComponentDefined<T>() && "Component already registered!");
 		ComponentID id = ++ID;;
 		ComponentPool<T>* pool = new ComponentPool<T>();
 		ComponentPoolReacher.insert({ id, static_cast<IComponentPool*>(pool) });
@@ -78,6 +78,12 @@ public:
 		assert(ComponentList.find(std::string(type)) != ComponentList.end() && "Component not registered!");
 
 		return ComponentList.find(std::string(type))->second;
+	}
+
+	template<typename T>
+	bool IsComponentRegistered()
+	{
+		return (ComponentList.find(std::string(type_name<T>())) != ComponentList.end());
 	}
 
 	//Get component name by ComponentID.

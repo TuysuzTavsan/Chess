@@ -1,8 +1,8 @@
 #ifndef SCENE_H
 #define SCENE_H
 
-#include <ecs/ecs.h>
 #include <components/script.h>
+#include <newECS/ECSManager.h>
 
 struct Scene
 {
@@ -33,7 +33,7 @@ public:
 		std::cout << "Instantiating scriptable entities!\n";
 		for (auto& scriptComponent : scripts)
 		{
-			scriptComponent->scriptable->instance = ECS::CreateEntity();
+			scriptComponent->scriptable->instance = ECSManager::getManager()->CreateEntity();
 		}
 		std::cout << "Instantiating scriptable entities done!\n";
 	}
@@ -65,7 +65,7 @@ public:
 		std::cout << "Cleaning scriptable entities!\n";
 		for (auto& scriptComponent : scripts)
 		{
-			ECS::FreeEntity(scriptComponent->scriptable->instance);
+			ECSManager::getManager()->FreeEntity(scriptComponent->scriptable->instance);
 			scriptComponent->scriptable->instance = NULL;
 		}
 		std::cout << "Cleaning done!\n";

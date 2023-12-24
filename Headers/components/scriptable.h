@@ -1,12 +1,12 @@
 #pragma once
-#include <ecs/ecs.h>
+#include <newECS/necsTypes.h>
 
 
 //Interface for a script
 class Scriptable
 {
 public:
-	ECS::Entity instance = 0;
+	Entity instance = 0;
 
 	virtual ~Scriptable() = default;
 
