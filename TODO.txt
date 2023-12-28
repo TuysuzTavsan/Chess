@@ -1,13 +1,13 @@
-Script system
-Scene system
+Script system === done
+Scene system = partial done TODO: Define a way to manage script lifetimes.
+TODO: std::map is sorted automaticly? so check the code if i do extra stff
+TODO: write spriteShaders.
+TODO: sprite will hold pointer to texture? or some sort of index or string?
+
+
 Sprite component
 button component
-animated sprite component
 text component
-Engine will load scripted entities to scenes, then run the scenes.
 
 
-
-script system needs to run on scripts and instantiates them? Maybe a seperate manager that works with scenes?
-
-FİX ECS TO LOAD DLLS
+script system needs to run on scripts and instantiates them? Maybe a seperate manager that works with scenes? === done
