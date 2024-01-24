@@ -4,21 +4,21 @@
 #include <shader.h>	
 #include <color.h>
 #include <vector.h>
-#include <ptr.h>
+#include <memory>
 
 // Base class for all 2D drawings
 
 class Drawable2D {
 protected:
 
-	SoftPtr<Shader> shader; //Shader with soft pointer
+	std::shared_ptr<Shader> shader; //Shader with soft pointer
 
 	Color color; // Base color
 	Vec2 position; // Position. This will have effect on visual output
 	Vec2 origin; // TO DO: We need origin to rotate.
 
-	HardPtr<float[]> vertices; // pointer to vertices
-	HardPtr<unsigned int[]> indices; // pointer to indices
+	std::unique_ptr<float[]> vertices; // pointer to vertices
+	std::unique_ptr<unsigned int[]> indices; // pointer to indices
 
 	unsigned int VBO; // Vertex buffer object
 	unsigned int VAO; // Vertex Attribute object

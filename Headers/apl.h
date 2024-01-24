@@ -23,6 +23,8 @@ namespace APL
 	extern GLFWwindow* window; // GLFW window object.
 	extern SceneManager* sceneManager;
 	extern SystemManager* systemManager;
+	extern double mousePosx;
+	extern double mousePosy;
 	
 	//Initiliaze window and other minor stuff.
 	bool Init();

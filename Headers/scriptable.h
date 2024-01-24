@@ -1,6 +1,6 @@
 #pragma once
 #include <ecs/ecsTypes.h>
-#include <observer.h>
+#include <signal.h>
 
 
 //Interface for a script

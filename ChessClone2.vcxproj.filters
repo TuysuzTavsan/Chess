@@ -56,16 +56,13 @@
     <ClInclude Include="Headers\Types\matrix.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Headers\Types\ptr.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Headers\Types\vector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Headers\drawable2D.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Headers\observer.h">
+    <ClInclude Include="Headers\signal.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Headers\rectangle.h">
@@ -125,7 +122,7 @@
     <ClInclude Include="Headers\components\sprite.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GameCode\Chess\scene1.h">
+    <ClInclude Include="GameCode\Chess\clientScenes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GameCode\Chess\clientComponents.h">
@@ -137,5 +134,21 @@
     <ClInclude Include="GameCode\Chess\clientSystems.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="GameCode\Chess\playButton.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Headers\components\button.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Headers\components\guiComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Headers\utility.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ShaderSrc\GUIVertex.glsl" />
+    <None Include="ShaderSrc\GUIFragment.glsl" />
   </ItemGroup>
 </Project>

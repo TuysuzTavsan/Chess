@@ -4,7 +4,7 @@
 #include <stb/stb_image.h>
 
 
-#include <Chess/scene1.h>
+#include <Chess/clientScenes.h>
 #include <Chess/clientComponents.h>
 #include <Chess/clientSystems.h>
 
@@ -39,6 +39,8 @@ bool APL::Init()
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+	glfwWindowHint(GLFW_SAMPLES, 4);
+
 
 	window = glfwCreateWindow(APL::WINDOW_WIDTH, APL::WINDOW_HEIGHT, APL::WindowTitle, NULL, NULL);
 
@@ -64,6 +66,8 @@ bool APL::Init()
 	APL::Ortho = Mat4x4::Ortho(0.0f, (float)APL::WINDOW_WIDTH, 0.0f,
 									 (float)APL::WINDOW_HEIGHT, -1.0f, 1000.0f);
 
+	glEnable(GL_MULTISAMPLE);
+
 
 	RegisterComponents();
 	RegisterSystems();
@@ -76,8 +80,14 @@ bool APL::Init()
 
 void APL::InitScenes()
 {
-	Scene* scene1 = InitScene1();
-	sceneManager->AddScene(scene1);
+	std::vector<Scene*> scenes;
+	InitClientScenes(scenes);
+
+	for (auto& sceneP : scenes)
+	{
+		sceneManager->AddScene(sceneP);
+	}
+	
 }
 
 void APL::RegisterComponents()
@@ -156,7 +166,7 @@ void APL::Run()
 	while (!glfwWindowShouldClose(APL::window))
 	{
 		SetDelta();
-
+		glfwGetCursorPos(APL::window, &APL::mousePosx, &APL::mousePosy);
 
 		sceneManager->Play(APL::deltaTime);
 		

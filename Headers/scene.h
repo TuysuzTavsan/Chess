@@ -3,11 +3,8 @@
 
 #include <components/script.h>
 #include <ecs/ECSManager.h>
-#include <observer.h>
+#include <signal.h>
 
-#define NEW_SCENE(x) Scene* x = new Scene
-#define ADD_SCRIPT(scene, script) scene->AddScript(new Script(new script))
-#define RETURN_SCENE(x) return x
 
 struct Scene
 {
@@ -41,11 +38,9 @@ public:
 		{
 			scriptComponent->scriptable->instance = ECSManager::getManager()->CreateEntity();
 			scriptComponent->scriptable->free.Connect(
-				[this](Entity t) -> void {FreeScript(t);}
-			);
+				[this](Entity t) -> void {FreeScript(t);}	);
 			scriptComponent->scriptable->endScene.Connect(
-				[this]() -> void {endScene.Emmit();}
-			);
+				[this]() -> void {endScene.Emmit();}	);
 		}
 		std::cout << "Instantiating scriptable entities done!\n";
 	}
@@ -142,15 +137,17 @@ public:
 		{
 			return;
 		}
-		if (!isReady)
+		else if(!isReady)
 		{
 			scenes[active]->ScriptOnInit();
 			isReady = true;
+			return;
 		}
-		if (!shouldEnd)
+		else
 		{
 			scenes[active]->ScriptOnUpdate(dt);
 		}
+		
 
 		
 		
@@ -160,7 +157,6 @@ public:
 	{
 		scenes[active]->ScriptOnFree();
 		scenes[active]->FreeAll();
-		shouldEnd = true;
 		isReady = false;
 
 

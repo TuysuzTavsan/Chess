@@ -7,28 +7,28 @@ Rectangle::Rectangle()
 	texture0{}
 {
 
-	vertices = std::move(HardPtr<float[]>(new float[16]{
-			position.x - (size.x / 2), position.y + (size.y / 2), 0.0f, 1.0f, // Top left
+	vertices = std::move(std::unique_ptr<float[]>(new float[16] {
+		position.x - (size.x / 2), position.y + (size.y / 2), 0.0f, 1.0f, // Top left
 			position.x - (size.x / 2), position.y - (size.y / 2), 0.0f, 0.0f, // Bottom left
 			position.x + (size.x / 2), position.y - (size.y / 2), 1.0f, 0.0f,// Bottom right
 			position.x + (size.x / 2), position.y + (size.y / 2), 1.0f, 1.0f,// Top right
-	}));
+		}));
 
-	indices = std::move(HardPtr<unsigned int[]>(new unsigned int[6] {
+	indices = std::move(std::unique_ptr<unsigned int[]>(new unsigned int[6] {
 		0, 1, 2,	// First triangle
 		2, 3, 0	    // Second triangle
 	}));
 
 	glBindVertexArray(this->VAO);
 	glBindBuffer(GL_ARRAY_BUFFER, this->VBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 16, this->vertices.getP(), GL_DYNAMIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 16, this->vertices.get(), GL_DYNAMIC_DRAW);
 	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), 0);
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)(2*sizeof(float)));
 	glEnableVertexAttribArray(1);
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * 6, this->indices.getP(), GL_STATIC_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * 6, this->indices.get(), GL_STATIC_DRAW);
 
 }
 
@@ -36,49 +36,49 @@ Rectangle::Rectangle(const Vec2& size)
 	: Drawable2D(), topLeft(), bottomRight(), size(size)
 {
 
-	vertices = std::move(HardPtr<float[]>(new float[16]{
+	vertices = std::move(std::unique_ptr<float[]>(new float[16]{
 			position.x - (size.x / 2), position.y + (size.y / 2), 0.0f, 1.0f, // Top left
 			position.x - (size.x / 2), position.y - (size.y / 2), 0.0f, 0.0f, // Bottom left
 			position.x + (size.x / 2), position.y - (size.y / 2), 1.0f, 0.0f,// Bottom right
 			position.x + (size.x / 2), position.y + (size.y / 2), 1.0f, 1.0f,// Top right
 	}));
 
-	indices = std::move(HardPtr<unsigned int[]>(new unsigned int[6] {
+	indices = std::move(std::unique_ptr<unsigned int[]>(new unsigned int[6] {
 		0, 1, 2,	// First triangle
 		2, 3, 0	    // Second triangle
 	}));
 
 	glBindVertexArray(this->VAO);
 	glBindBuffer(GL_ARRAY_BUFFER, this->VBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 16, this->vertices.getP(), GL_DYNAMIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 16, this->vertices.get(), GL_DYNAMIC_DRAW);
 	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), 0);
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)(2*sizeof(float)));
 	glEnableVertexAttribArray(1);
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * 6, this->indices.getP(), GL_STATIC_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * 6, this->indices.get(), GL_STATIC_DRAW);
 
 }
 
 Rectangle::Rectangle(Rectangle& copy)
 	: Drawable2D(copy), topLeft(copy.topLeft), bottomRight(copy.bottomRight), size(copy.size)
 {
-	vertices = std::move(HardPtr<float[]>(new float[16]{
+	vertices = std::move(std::unique_ptr<float[]>(new float[16]{
 			position.x - (size.x / 2), position.y + (size.y / 2), 0.0f, 1.0f, // Top left
 			position.x - (size.x / 2), position.y - (size.y / 2), 0.0f, 0.0f, // Bottom left
 			position.x + (size.x / 2), position.y - (size.y / 2), 1.0f, 0.0f,// Bottom right
 			position.x + (size.x / 2), position.y + (size.y / 2), 1.0f, 1.0f,// Top right
 	}));
 
-	indices = std::move(HardPtr<unsigned int[]>(new unsigned int[6] {
+	indices = std::move(std::unique_ptr<unsigned int[]>(new unsigned int[6] {
 		0, 1, 2,	// First triangle
 		2, 3, 0	    // Second triangle
 	}));
 
 	glBindVertexArray(this->VAO);
 	glBindBuffer(GL_ARRAY_BUFFER, this->VBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 16, this->vertices.getP(), GL_DYNAMIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 16, this->vertices.get(), GL_DYNAMIC_DRAW);
 	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), 0);
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)(2*sizeof(float)));
@@ -86,7 +86,7 @@ Rectangle::Rectangle(Rectangle& copy)
 
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * 6, this->indices.getP(), GL_STATIC_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * 6, this->indices.get(), GL_STATIC_DRAW);
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -130,20 +130,20 @@ void Rectangle::SetCorner(const Vec2& top_left, const Vec2& bottom_right)
 
 void Rectangle::ApplyChanges()
 {
-	if (vertices.getP())
+	if (vertices.get())
 	{
 		
-		vertices.getP()[0] = position.x - (size.x / 2);
-		vertices.getP()[1] = position.y + (size.y / 2);
-		vertices.getP()[4] = position.x - (size.x / 2);
-		vertices.getP()[5] = position.y - (size.y / 2);
-		vertices.getP()[8] = position.x + (size.x / 2);
-		vertices.getP()[9] = position.y - (size.y / 2);
-		vertices.getP()[12] = position.x + (size.x / 2);
-		vertices.getP()[13] = position.y + (size.y / 2);
+		vertices.get()[0] = position.x - (size.x / 2);
+		vertices.get()[1] = position.y + (size.y / 2);
+		vertices.get()[4] = position.x - (size.x / 2);
+		vertices.get()[5] = position.y - (size.y / 2);
+		vertices.get()[8] = position.x + (size.x / 2);
+		vertices.get()[9] = position.y - (size.y / 2);
+		vertices.get()[12] = position.x + (size.x / 2);
+		vertices.get()[13] = position.y + (size.y / 2);
 
 		glBindBuffer(GL_ARRAY_BUFFER, VBO);
-		glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(float) * 16, this->vertices.getP()); // be sure to use glBufferSubData and not glBufferData
+		glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(float) * 16, this->vertices.get()); // be sure to use glBufferSubData and not glBufferData
 	}
 }
 

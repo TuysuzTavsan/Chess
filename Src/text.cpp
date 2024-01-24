@@ -5,7 +5,7 @@
 Text::Text()
 	: Drawable2D(), Characters(), text(""), font_path("Resources/arial.ttf"), scale(1.0f), size(48.0)
 {
-	this->shader = SoftPtr<Shader>(new Shader("ShaderSrc/textVertex.glsl", "ShaderSrc/textFragment.glsl"));
+	this->shader = std::shared_ptr<Shader>(new Shader("ShaderSrc/textVertex.glsl", "ShaderSrc/textFragment.glsl"));
 	LoadFont(this->font_path, this-> size);
 
 }

@@ -158,8 +158,11 @@
     <ClInclude Include="GameCode\Chess\firstscript.h" />
     <ClInclude Include="GameCode\Chess\clientSystems.h" />
     <ClInclude Include="GameCode\Chess\clientComponents.h" />
+    <ClInclude Include="GameCode\Chess\playButton.h" />
     <ClInclude Include="GameCode\Chess\renderSystem.h" />
-    <ClInclude Include="GameCode\Chess\scene1.h" />
+    <ClInclude Include="GameCode\Chess\clientScenes.h" />
+    <ClInclude Include="Headers\components\button.h" />
+    <ClInclude Include="Headers\components\guiComponent.h" />
     <ClInclude Include="Headers\components\script.h" />
     <ClInclude Include="Headers\ecs\SystemManager.h" />
     <ClInclude Include="Headers\scriptable.h" />
@@ -172,7 +175,7 @@
     <ClInclude Include="Headers\ecs\System.h" />
     <ClInclude Include="Headers\ecs\type_name.h" />
     <ClInclude Include="Headers\scene.h" />
-    <ClInclude Include="Headers\observer.h" />
+    <ClInclude Include="Headers\signal.h" />
     <ClInclude Include="Headers\platform.h" />
     <ClInclude Include="Headers\rectangle.h" />
     <ClInclude Include="Headers\shader.h" />
@@ -180,10 +183,14 @@
     <ClInclude Include="Headers\texture.h" />
     <ClInclude Include="Headers\Types\color.h" />
     <ClInclude Include="Headers\Types\matrix.h" />
-    <ClInclude Include="Headers\Types\ptr.h" />
     <ClInclude Include="Headers\Types\vector.h" />
     <ClInclude Include="Headers\ecs\EntityManager.h" />
     <ClInclude Include="Headers\ecs\ecsTypes.h" />
+    <ClInclude Include="Headers\utility.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ShaderSrc\GUIFragment.glsl" />
+    <None Include="ShaderSrc\GUIVertex.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -4,7 +4,11 @@
 #include <ecs/System.h>
 #include <ecs/ECSManager.h>
 #include <shader.h>
+#include <apl.h>
 #include <text.h>
+#include <components/sprite.h>
+#include <components/button.h>
+#include <utility.h>
 
 class RenderSystem : public System
 {
@@ -12,7 +16,8 @@ public:
 
 	RenderSystem()
 		:
-		shader(new Shader("ShaderSrc/spriteVertex.glsl", "ShaderSrc/spriteFragment.glsl"))
+		spriteShader(new Shader("ShaderSrc/spriteVertex.glsl", "ShaderSrc/spriteFragment.glsl")),
+		GUIShader(new Shader("ShaderSrc/GUIVertex.glsl", "ShaderSrc/GUIFragment.glsl"))
 		
 	{
 
@@ -28,8 +33,12 @@ public:
 			0.5f, 0.5f, 1.0f, 1.0f,// Top right
 			};
 
-		this->shader->use();
-		this->shader->setInt("texture0", 0);
+		this->spriteShader->use();
+		this->spriteShader->setInt("texture0", 0);
+
+		this->GUIShader->setInt("bgTexture", 0);
+		this->GUIShader->setInt("hoverTexture", 1);
+		this->GUIShader->setInt("activeTexture", 2);
 
 		glGenVertexArrays(1, &VAO);
 		glGenBuffers(1, &VBO);
@@ -66,15 +75,15 @@ public:
 	{
 		ECSManager* manager = ECSManager::getManager();
 
-		this->shader->use();
-		this->shader->setInt("texture0", 0);
+		this->spriteShader->use();
+		this->spriteShader->setInt("texture0", 0);
 		glBindVertexArray(VAO);
-		glUniformMatrix4fv(glGetUniformLocation(this->shader->ID, "projection"), 1, GL_FALSE, &APL::Ortho.x.x);
+		glUniformMatrix4fv(glGetUniformLocation(this->spriteShader->ID, "projection"), 1, GL_FALSE, &APL::Ortho.x.x);
 
 		for (auto& sprite : manager->GetPoolData<Sprite>())
 		{
 			glBindBuffer(GL_ARRAY_BUFFER, VBO);
-			glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 16, vertices, GL_STATIC_DRAW);
+			glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 16, sprite.vertices.get(), GL_STATIC_DRAW);
 			glBindTexture(GL_TEXTURE_2D, sprite.texture.GetTextureData());
 			glActiveTexture(GL_TEXTURE0);
 			
@@ -85,11 +94,47 @@ public:
 		glBindVertexArray(0);
 
 
+
+		this->GUIShader->use();
+		this->GUIShader->setInt("bgTexture", 0);
+		this->GUIShader->setInt("hoverTexture", 1);
+		this->GUIShader->setInt("activeTexture", 2);
+		glUniformMatrix4fv(glGetUniformLocation(this->GUIShader->ID, "projection"), 1, GL_FALSE, &APL::Ortho.x.x);
+
+		for (auto& button : manager->GetPoolData<Button>())
+		{
+			glBindBuffer(GL_ARRAY_BUFFER, VBO);
+			glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 16, button.vertices.get(), GL_STATIC_DRAW);
+
+			glActiveTexture(GL_TEXTURE0);
+			glBindTexture(GL_TEXTURE_2D, button.bgTexture.GetTextureData());
+			glActiveTexture(GL_TEXTURE1);
+			glBindTexture(GL_TEXTURE_2D, button.hoverTexture.GetTextureData());
+			glActiveTexture(GL_TEXTURE2);
+			glBindTexture(GL_TEXTURE_2D, button.activeTexture.GetTextureData());
+
+			if (IsInside(button.position, button.size, Vec2(APL::mousePosx, APL::mousePosy)))
+			{
+				this->GUIShader->setInt("state", 1);
+			}
+			else
+			{
+				this->GUIShader->setInt("state", 0);
+			}
+			
+			
+			//this->GUIShader->setInt("state", 2);
+
+
+			glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+		}
+
 		//glfwSwapBuffers(APL::window);
 	}
 
 private:
-	std::shared_ptr<Shader> shader;
+	std::shared_ptr<Shader> spriteShader;
+	std::shared_ptr<Shader> GUIShader;
 	unsigned int Buff;
 	unsigned int VAO;
 	unsigned int VBO;

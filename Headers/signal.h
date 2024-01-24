@@ -1,5 +1,5 @@
-#ifndef OBSERVER_H
-#define OBSERVER_H
+#ifndef SIGNAL_H
+#define SIGNAL_H
 
 #include <cstdint>
 #include <assert.h>

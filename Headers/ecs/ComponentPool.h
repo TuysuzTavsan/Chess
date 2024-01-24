@@ -86,9 +86,9 @@ public:
 	T& GetComponent(Entity entity)
 	{
 		//Remember to assert!
-		//assert(_Entity::LivingEntites.find(entity) != _Entity::LivingEntites.end()
-		//	&& EntityToIndex.find(entity) != EntityToIndex.end()
-		//	&& "Entity does not exist or does not have specified component!");
+		/*assert(_Entity::LivingEntites.find(entity) != _Entity::LivingEntites.end()
+			&& EntityToIndex.find(entity) != EntityToIndex.end()
+			&& "Entity does not exist or does not have specified component!");*/
 
 		Index index = EntityToIndex.find(entity)->second;
 		return pool[index];
