@@ -7,8 +7,8 @@
 Texture::Texture()
 : texture(new unsigned int{0}), isLoaded(false)
 {
-    glGenTextures(1, this->texture.getP());
-    glBindTexture(GL_TEXTURE_2D, *this->texture.getP());
+    glGenTextures(1, this->texture.get());
+    glBindTexture(GL_TEXTURE_2D, *this->texture.get());
 
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);	
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
@@ -20,12 +20,15 @@ Texture::Texture()
 
 Texture::~Texture()
 {
-    glDeleteTextures(1, this->texture.getP());
+    if(this->texture.use_count() == 1)
+    {
+        glDeleteTextures(1, this->texture.get());
+    }
 }
 
 bool Texture::LoadTexture(const std::string& path)
 {
-    glBindTexture(GL_TEXTURE_2D, *this->texture.getP());
+    glBindTexture(GL_TEXTURE_2D, *this->texture.get());
     int width, height, nrChannels;
     unsigned char* data = stbi_load(path.c_str(), &width, &height, &nrChannels, 0);
     assert(data && "STBI_LOAD FAILED");
@@ -55,5 +58,5 @@ bool Texture::IsLoaded()
 
 unsigned int Texture::GetTextureData()
 {
-    return *this->texture.getP();
+    return *this->texture.get();
 }

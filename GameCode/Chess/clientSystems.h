@@ -1,11 +1,11 @@
 #pragma once
 #include <ecs/SystemManager.h>
 
-#include <Chess/renderSystem.h>
+#include <Chess/spriteSystem.h>
 
 #define ADD_SYSTEM(x) systemManager->AddSystem(new x)
 
 void SetClientSystems(SystemManager* systemManager)
 {
-	ADD_SYSTEM(RenderSystem);
+	ADD_SYSTEM(SpriteSystem);
 }

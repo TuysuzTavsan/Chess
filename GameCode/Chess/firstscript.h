@@ -10,25 +10,21 @@ class firstScript : public Scriptable
 
 	virtual void Instantiate() override
 	{
-		Sprite sprite;
-		sprite.texture.LoadTexture("Resources/kalp.png");
-		sprite.vertices = new float[16]
-		{
-			0.5f, 0.5f, 0.0f, 1.0f, // Top left
-			0.5f, -0.5f, 0.0f, 0.0f, // Bottom left
-			-0.5f, -0.5f, 1.0f, 0.0f,// Bottom right
-			-0.5f, 0.5f, 1.0f, 1.0f,// Top right
 
-		};
-
-		ECSManager::getManager()->InsertComponent<Sprite>(this->instance, sprite);
+		ECSManager::getManager()->InsertComponent<Sprite>(this->instance, Sprite("Resources/kalp.png"));
 		std::cout << "Hello Script\n";
 	}
 
 	virtual void Update(const float& dt) override
 	{
-	
 		std::cout << "Updating script.\n";
+		Sprite& sprite = ECSManager::getManager()->GetComponentData<Sprite>(this->instance);
+		sprite.Move(Vec2(0.1, 0.1));
+		if(sprite.position.x > 150)
+		{
+			this->endScene.Emmit();
+		}
+		
 	}
 
 	virtual void OnFree() override

@@ -1,11 +1,11 @@
 #ifndef TEXTURE_H
 #define TEXTURE_H
 #include <string>
-#include <ptr.h>
+#include <memory>
 
 class Texture
 {
-    SoftPtr<unsigned int> texture;
+    std::shared_ptr<unsigned int> texture;
     bool isLoaded;
 
 public:

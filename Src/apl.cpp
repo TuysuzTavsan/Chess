@@ -3,6 +3,7 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb/stb_image.h>
 
+
 #include <Chess/scene1.h>
 #include <Chess/clientComponents.h>
 #include <Chess/clientSystems.h>
@@ -167,7 +168,7 @@ void APL::Run()
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		systemManager->Update(APL::deltaTime);
 
-		//glfwSwapBuffers(APL::window);
+		glfwSwapBuffers(APL::window);
 
 		glfwPollEvents();
 	
