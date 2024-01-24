@@ -1,0 +1,16 @@
+Script system === done
+Scene system = partial done TODO: Define a way to manage script lifetimes.
+TODO: std::map is sorted automaticly? so check the code if i do extra stff
+TODO: write spriteShaders.
+TODO: sprite will hold pointer to texture? or some sort of index or string?
+TODO: think about signals and seg faults?
+TODO: signals to communicate between scripts ?
+TODO: proper way of handling component datas. Should all of components have 1 matching system for it?
+TODO: need a safer code to avoid future headaches. USE SMART POINTERS!
+
+Sprite component
+button component
+text component
+
+
+script system needs to run on scripts and instantiates them? Maybe a seperate manager that works with scenes? === done

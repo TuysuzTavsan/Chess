@@ -1,0 +1,57 @@
+[
+{
+  "directory": "/home/kebab/Desktop/Chess-main/build",
+  "command": "/usr/bin/g++  -I/home/kebab/Desktop/Chess-main/Dependencies/Include -I/home/kebab/Desktop/Chess-main/Dependencies/Include/freetype2 -I/home/kebab/Desktop/Chess-main/Headers -I/home/kebab/Desktop/Chess-main/Headers/Types -I/home/kebab/Desktop/Chess-main/Headers/ECS -I/home/kebab/Desktop/Chess-main/GameCode -Wall -g -std=gnu++20 -o CMakeFiles/chess.dir/Src/drawable2D.cpp.o -c /home/kebab/Desktop/Chess-main/Src/drawable2D.cpp",
+  "file": "/home/kebab/Desktop/Chess-main/Src/drawable2D.cpp"
+},
+{
+  "directory": "/home/kebab/Desktop/Chess-main/build",
+  "command": "/usr/bin/g++  -I/home/kebab/Desktop/Chess-main/Dependencies/Include -I/home/kebab/Desktop/Chess-main/Dependencies/Include/freetype2 -I/home/kebab/Desktop/Chess-main/Headers -I/home/kebab/Desktop/Chess-main/Headers/Types -I/home/kebab/Desktop/Chess-main/Headers/ECS -I/home/kebab/Desktop/Chess-main/GameCode -Wall -g -std=gnu++20 -o CMakeFiles/chess.dir/Src/apl.cpp.o -c /home/kebab/Desktop/Chess-main/Src/apl.cpp",
+  "file": "/home/kebab/Desktop/Chess-main/Src/apl.cpp"
+},
+{
+  "directory": "/home/kebab/Desktop/Chess-main/build",
+  "command": "/usr/bin/g++  -I/home/kebab/Desktop/Chess-main/Dependencies/Include -I/home/kebab/Desktop/Chess-main/Dependencies/Include/freetype2 -I/home/kebab/Desktop/Chess-main/Headers -I/home/kebab/Desktop/Chess-main/Headers/Types -I/home/kebab/Desktop/Chess-main/Headers/ECS -I/home/kebab/Desktop/Chess-main/GameCode -Wall -g -std=gnu++20 -o CMakeFiles/chess.dir/Src/main.cpp.o -c /home/kebab/Desktop/Chess-main/Src/main.cpp",
+  "file": "/home/kebab/Desktop/Chess-main/Src/main.cpp"
+},
+{
+  "directory": "/home/kebab/Desktop/Chess-main/build",
+  "command": "/usr/bin/g++  -I/home/kebab/Desktop/Chess-main/Dependencies/Include -I/home/kebab/Desktop/Chess-main/Dependencies/Include/freetype2 -I/home/kebab/Desktop/Chess-main/Headers -I/home/kebab/Desktop/Chess-main/Headers/Types -I/home/kebab/Desktop/Chess-main/Headers/ECS -I/home/kebab/Desktop/Chess-main/GameCode -Wall -g -std=gnu++20 -o CMakeFiles/chess.dir/Src/rectangle.cpp.o -c /home/kebab/Desktop/Chess-main/Src/rectangle.cpp",
+  "file": "/home/kebab/Desktop/Chess-main/Src/rectangle.cpp"
+},
+{
+  "directory": "/home/kebab/Desktop/Chess-main/build",
+  "command": "/usr/bin/g++  -I/home/kebab/Desktop/Chess-main/Dependencies/Include -I/home/kebab/Desktop/Chess-main/Dependencies/Include/freetype2 -I/home/kebab/Desktop/Chess-main/Headers -I/home/kebab/Desktop/Chess-main/Headers/Types -I/home/kebab/Desktop/Chess-main/Headers/ECS -I/home/kebab/Desktop/Chess-main/GameCode -Wall -g -std=gnu++20 -o CMakeFiles/chess.dir/Src/shader.cpp.o -c /home/kebab/Desktop/Chess-main/Src/shader.cpp",
+  "file": "/home/kebab/Desktop/Chess-main/Src/shader.cpp"
+},
+{
+  "directory": "/home/kebab/Desktop/Chess-main/build",
+  "command": "/usr/bin/g++  -I/home/kebab/Desktop/Chess-main/Dependencies/Include -I/home/kebab/Desktop/Chess-main/Dependencies/Include/freetype2 -I/home/kebab/Desktop/Chess-main/Headers -I/home/kebab/Desktop/Chess-main/Headers/Types -I/home/kebab/Desktop/Chess-main/Headers/ECS -I/home/kebab/Desktop/Chess-main/GameCode -Wall -g -std=gnu++20 -o CMakeFiles/chess.dir/Src/text.cpp.o -c /home/kebab/Desktop/Chess-main/Src/text.cpp",
+  "file": "/home/kebab/Desktop/Chess-main/Src/text.cpp"
+},
+{
+  "directory": "/home/kebab/Desktop/Chess-main/build",
+  "command": "/usr/bin/g++  -I/home/kebab/Desktop/Chess-main/Dependencies/Include -I/home/kebab/Desktop/Chess-main/Dependencies/Include/freetype2 -I/home/kebab/Desktop/Chess-main/Headers -I/home/kebab/Desktop/Chess-main/Headers/Types -I/home/kebab/Desktop/Chess-main/Headers/ECS -I/home/kebab/Desktop/Chess-main/GameCode -Wall -g -std=gnu++20 -o CMakeFiles/chess.dir/Src/texture.cpp.o -c /home/kebab/Desktop/Chess-main/Src/texture.cpp",
+  "file": "/home/kebab/Desktop/Chess-main/Src/texture.cpp"
+},
+{
+  "directory": "/home/kebab/Desktop/Chess-main/build",
+  "command": "/usr/bin/gcc  -I/home/kebab/Desktop/Chess-main/Dependencies/Include -I/home/kebab/Desktop/Chess-main/Dependencies/Include/freetype2 -I/home/kebab/Desktop/Chess-main/Headers -I/home/kebab/Desktop/Chess-main/Headers/Types -I/home/kebab/Desktop/Chess-main/Headers/ECS -I/home/kebab/Desktop/Chess-main/GameCode -g -o CMakeFiles/chess.dir/Dependencies/Include/glad.c.o -c /home/kebab/Desktop/Chess-main/Dependencies/Include/glad.c",
+  "file": "/home/kebab/Desktop/Chess-main/Dependencies/Include/glad.c"
+},
+{
+  "directory": "/home/kebab/Desktop/Chess-main/build",
+  "command": "/usr/bin/g++  -I/home/kebab/Desktop/Chess-main/Dependencies/Include -I/home/kebab/Desktop/Chess-main/Dependencies/Include/freetype2 -I/home/kebab/Desktop/Chess-main/Headers -I/home/kebab/Desktop/Chess-main/Headers/Types -I/home/kebab/Desktop/Chess-main/Headers/ECS -I/home/kebab/Desktop/Chess-main/GameCode -Wall -g -std=gnu++20 -o CMakeFiles/chess.dir/Headers/ecs/ComponentManager.cpp.o -c /home/kebab/Desktop/Chess-main/Headers/ecs/ComponentManager.cpp",
+  "file": "/home/kebab/Desktop/Chess-main/Headers/ecs/ComponentManager.cpp"
+},
+{
+  "directory": "/home/kebab/Desktop/Chess-main/build",
+  "command": "/usr/bin/g++  -I/home/kebab/Desktop/Chess-main/Dependencies/Include -I/home/kebab/Desktop/Chess-main/Dependencies/Include/freetype2 -I/home/kebab/Desktop/Chess-main/Headers -I/home/kebab/Desktop/Chess-main/Headers/Types -I/home/kebab/Desktop/Chess-main/Headers/ECS -I/home/kebab/Desktop/Chess-main/GameCode -Wall -g -std=gnu++20 -o CMakeFiles/chess.dir/Headers/ecs/ECSManager.cpp.o -c /home/kebab/Desktop/Chess-main/Headers/ecs/ECSManager.cpp",
+  "file": "/home/kebab/Desktop/Chess-main/Headers/ecs/ECSManager.cpp"
+},
+{
+  "directory": "/home/kebab/Desktop/Chess-main/build",
+  "command": "/usr/bin/g++  -I/home/kebab/Desktop/Chess-main/Dependencies/Include -I/home/kebab/Desktop/Chess-main/Dependencies/Include/freetype2 -I/home/kebab/Desktop/Chess-main/Headers -I/home/kebab/Desktop/Chess-main/Headers/Types -I/home/kebab/Desktop/Chess-main/Headers/ECS -I/home/kebab/Desktop/Chess-main/GameCode -Wall -g -std=gnu++20 -o CMakeFiles/chess.dir/Headers/ecs/EntityManager.cpp.o -c /home/kebab/Desktop/Chess-main/Headers/ecs/EntityManager.cpp",
+  "file": "/home/kebab/Desktop/Chess-main/Headers/ecs/EntityManager.cpp"
+}
+]

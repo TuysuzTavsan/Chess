@@ -1,0 +1,3 @@
+/home/kebab/Desktop/Chess-main/build/CMakeFiles/chess.dir
+/home/kebab/Desktop/Chess-main/build/CMakeFiles/edit_cache.dir
+/home/kebab/Desktop/Chess-main/build/CMakeFiles/rebuild_cache.dir
