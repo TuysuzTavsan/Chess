@@ -46,6 +46,8 @@ public:
 	void SetScale(const float& scale);
 	//Set and load new font.
 	bool SetFont(const std::string& path);
+	//Get the first characters position in screen coordinates.
+	void FitInBox(const Vec2& boxPos, const Vec2& boxSize);
 
 private:
 

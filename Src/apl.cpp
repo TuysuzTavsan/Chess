@@ -21,6 +21,8 @@ namespace APL
 	GLFWwindow* window = nullptr;
 	SceneManager* sceneManager = new SceneManager;
 	SystemManager* systemManager = new SystemManager;
+	double mousePosx = 0;
+	double mousePosy = 0;
 }
 
 
@@ -161,17 +163,16 @@ void APL::SetDelta()
 void APL::Run()
 {
 
-
+	
 
 	while (!glfwWindowShouldClose(APL::window))
 	{
 		SetDelta();
 		glfwGetCursorPos(APL::window, &APL::mousePosx, &APL::mousePosy);
 
+
 		sceneManager->Play(APL::deltaTime);
 		
-
-
 
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 

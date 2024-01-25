@@ -20,7 +20,7 @@ Texture::Texture()
 
 Texture::~Texture()
 {
-    if(this->texture.use_count() == 1)
+    if(this->texture.use_count() <= 1)
     {
         glDeleteTextures(1, this->texture.get());
     }
@@ -30,7 +30,8 @@ bool Texture::LoadTexture(const std::string& path)
 {
     glBindTexture(GL_TEXTURE_2D, *this->texture.get());
     int width, height, nrChannels;
-    unsigned char* data = stbi_load(path.c_str(), &width, &height, &nrChannels, 0);
+    //is 4 needed here? TODO: read the docs about it.
+    unsigned char* data = stbi_load(path.c_str(), &width, &height, &nrChannels, 4);
     assert(data && "STBI_LOAD FAILED");
     if(data)
     {

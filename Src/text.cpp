@@ -50,11 +50,11 @@ void Text::Render()
 		float h = ch.Size.y * scale;
 		// update VBO for each character
 		float vertices[6][4] = {
-			{ xpos,    ypos + h,   0.0f, 0.0f },
+			{ xpos,    ypos + h,   0.0f, 0.0f },		
 			{ xpos,      ypos,       0.0f, 1.0f },
 			{ xpos + w,  ypos,       1.0f, 1.0f },
 
-			{ xpos,      ypos + h,   0.0f, 0.0f },
+			{ xpos,      ypos + h,   0.0f, 0.0f }, 
 			{ xpos + w,  ypos,       1.0f, 1.0f },
 			{ xpos + w,  ypos + h,   1.0f, 0.0f }
 		};
@@ -94,6 +94,68 @@ bool Text::SetFont(const std::string& path)
 	this->font_path = path;
 	return LoadFont(this->font_path, this->size);
 }
+
+void Text::FitInBox(const Vec2& boxPos, const Vec2& boxSize)
+{
+	float maximum_height = 0;
+	float totalwidth = 0;
+
+	float advance = 0;
+	for (auto& _char : this->text)
+	{
+		totalwidth += advance * this->scale;
+		
+		if (maximum_height < this->Characters[_char].Bearing.y * this->scale)
+		{
+			maximum_height = this->Characters[_char].Bearing.y * this->scale;
+		}
+
+		advance = (this->Characters[_char].Advance >> 6);
+	}
+
+	totalwidth += this->Characters[this->text.back()].Size.x * scale;
+
+	//experimental extra bering to make it look better in a box. j is chosen randomly instead of a fix value.
+	float extraOffsetx = (this->Characters['k'].Advance >> 6) * 2;
+	totalwidth += extraOffsetx;
+
+	float scale1 = (boxSize.x) / totalwidth;
+	float scale2 = (boxSize.y) / maximum_height;
+
+	if (scale1 < scale2)
+	{
+		this->scale = scale1;
+	}
+	else
+	{
+		this->scale = scale2;
+	}
+
+	//Recalculate height and totalwidth
+	advance = 0;
+	maximum_height = 0;
+	totalwidth = 0;
+	for (auto& _char : this->text)
+	{
+		totalwidth += advance * this->scale;
+
+		if (maximum_height < this->Characters[_char].Bearing.y * this->scale)
+		{
+			maximum_height = this->Characters[_char].Bearing.y * this->scale;
+		}
+
+		advance = (this->Characters[_char].Advance >> 6);
+	}
+	totalwidth += this->Characters[this->text.back()].Size.x * scale;
+
+	float yoffset = (boxSize.y - maximum_height) / 2;
+	float xoffset = (boxSize.x - totalwidth) / 2;
+
+	this->position = Vec2(boxPos.x + xoffset , boxPos.y - yoffset - maximum_height);
+	
+
+}
+
 
 bool Text::LoadFont(const std::string& path, const float& _size)
 {

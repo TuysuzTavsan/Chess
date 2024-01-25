@@ -12,7 +12,16 @@
 //todo fix this
 #include <text.h>
 
+/*
+Implementing general purpose button component is hard.
+I will only implement this one. Which will need at least 3 texture to use.
+1- normal state texture
+2- hover texture
+3- active texture
+if you do not provide any of them it will render black box instead of nothing.
 
+Text will be aligned to start from middle and left point of the button always.
+*/
 
 
 
@@ -21,22 +30,22 @@ struct Button : GUIComponent
 	Text text;
 	Signal<void> buttonPressed;
 	Signal<void> buttonReleased;
+	bool active = false;
 
-	Button(Button& other)
+	Button(const Button& other)
 		: GUIComponent(other)
 	{
-
 		this->text = other.text;
 	}
 
 	Button(const std::string& text, const Vec2& position, const Vec2& size, std::string bgTexture)
-		: GUIComponent()
+		: GUIComponent(size, position)
 	{
-		this->size = size;
 		this->text.SetText(text.c_str());
-		this->position = position;
 		this->bgTexture.LoadTexture(bgTexture);
+		this->text.FitInBox(this->position, this->size);
 		this->UpdateVertices();
+		
 	}
 
 	Button(const std::string& text, const Vec2& position, const Vec2& size, std::string bgTexture, std::string hoverTexture)
@@ -47,6 +56,7 @@ struct Button : GUIComponent
 		this->position = position;
 		this->bgTexture.LoadTexture(bgTexture);
 		this->hoverTexture.LoadTexture(hoverTexture);
+		this->text.FitInBox(this->position, this->size);
 		this->UpdateVertices();
 	}
 
@@ -59,6 +69,7 @@ struct Button : GUIComponent
 		this->bgTexture.LoadTexture(bgTexture);
 		this->hoverTexture.LoadTexture(hoverTexture);
 		this->activeTexture.LoadTexture(activeTexture);
+		this->text.FitInBox(this->position, this->size);
 		this->UpdateVertices();
 	}
 
@@ -80,6 +91,7 @@ struct Button : GUIComponent
 
 	void OnActive() override
 	{
+		std::cout << "BUTTON IS ACTIVE NOW\n";
 		switch (glfwGetMouseButton(APL::window, GLFW_MOUSE_BUTTON_LEFT))
 		{
 		case GLFW_RELEASE:
@@ -87,6 +99,7 @@ struct Button : GUIComponent
 			break;
 		case GLFW_PRESS:
 			buttonPressed.Emmit();
+			active = true;
 			break;
 		}
 	}

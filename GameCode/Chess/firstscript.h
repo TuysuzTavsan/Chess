@@ -4,26 +4,21 @@
 #include <ecs/ECSManager.h>
 #include <components/sprite.h>
 
-class firstScript : public Scriptable
+class MenuBackGround : public Scriptable
 {
 	int x = 0;
 
 	virtual void Instantiate() override
 	{
 
-		ECSManager::getManager()->InsertComponent<Sprite>(this->instance, Sprite("Resources/kalp.png"));
-		std::cout << "Hello Script\n";
+		ECSManager::getManager()->InsertComponent<Sprite>(this->instance, Sprite("Resources/background2.jpg"));
+		Sprite& sprite = ECSManager::getManager()->GetComponentData<Sprite>(this->instance);
+		sprite.SetSize(Vec2(APL::WINDOW_WIDTH, APL::WINDOW_HEIGHT));
+		sprite.SetPosition(Vec2(0, APL::WINDOW_HEIGHT));
 	}
 
 	virtual void Update(const float& dt) override
 	{
-		std::cout << "Updating script.\n";
-		Sprite& sprite = ECSManager::getManager()->GetComponentData<Sprite>(this->instance);
-		sprite.Move(Vec2(0.1, 0.1));
-		if(sprite.position.x > 150)
-		{
-			this->endScene.Emmit();
-		}
 		
 	}
 

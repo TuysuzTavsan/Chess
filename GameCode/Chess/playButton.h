@@ -5,22 +5,29 @@
 #include <ecs/ECSManager.h>
 #include <components/button.h>
 
-class ButtonScript : public Scriptable
+class PlayButton : public Scriptable
 {
 	int x = 0;
 
 	virtual void Instantiate() override
 	{
 
-		ECSManager::getManager()->InsertComponent<Button>(this->instance, Button("Fuat", Vec2(300,400), Vec2(100,50), 
-			"Resources/Default.png"));
+		ECSManager::getManager()->InsertComponent<Button>(this->instance, Button("PLAY",
+			Vec2(300, 380), Vec2(200, 100), "Resources/gui/Button/Rect/Default@2x.png"));
 		Button& button = ECSManager::getManager()->GetComponentData<Button>(this->instance);
-		button.SetHoverTexture("Resources/Hover.png");
+		button.SetHoverTexture("Resources/gui/Button/Rect/Hover@2x.png");
+		button.buttonPressed.Connect([this]() {buttonClicked(); });
+		button.SetActiveTexture("Resources/gui/Button/Rect/Active@2x.png");
+		
+	}
+
+	void buttonClicked()
+	{
+		std::cout << "Button Clicked! Source: PlayButton\n";
 	}
 
 	virtual void Update(const float& dt) override
 	{
-		//Button& button = ECSManager::getManager()->GetComponentData<Button>(this->instance);
 		
 	}
 

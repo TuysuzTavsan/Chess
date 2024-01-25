@@ -2,6 +2,8 @@
 #include <scene.h>
 #include <Chess/firstscript.h>
 #include <Chess/playButton.h>
+#include <Chess/settingsButton.h>
+#include <Chess/exitButton.h>
 #include <vector>
 
 #define NEW_SCENE(scenes, new_scene_name) Scene* new_scene_name = new Scene; scenes.push_back(new_scene_name); 
@@ -10,8 +12,9 @@
 void InitClientScenes(std::vector<Scene*>& scenes)
 {
 	NEW_SCENE(scenes, scene1);
-	ADD_ENTITY(scene1, firstScript);
-	ADD_ENTITY(scene1, ButtonScript);
-	NEW_SCENE(scenes, scene2);
-	ADD_ENTITY(scene2, firstScript);
+	ADD_ENTITY(scene1, MenuBackGround);
+	ADD_ENTITY(scene1, PlayButton);
+	ADD_ENTITY(scene1, ExitButton);
+	ADD_ENTITY(scene1, SettingsButton);
+
 }

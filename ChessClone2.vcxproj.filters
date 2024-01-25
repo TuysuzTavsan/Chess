@@ -146,6 +146,12 @@
     <ClInclude Include="Headers\utility.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="GameCode\Chess\settingsButton.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameCode\Chess\exitButton.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="ShaderSrc\GUIVertex.glsl" />

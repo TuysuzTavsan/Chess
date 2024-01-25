@@ -16,12 +16,12 @@ struct Sprite
 	:
 	position(100.0, 100.0, 0.0),
 	size(100,100),
-	vertices(new float[16]{
-			position.x - (size.x / 2), position.y + (size.y / 2), 0.0f, 1.0f, // Top left
-			position.x - (size.x / 2), position.y - (size.y / 2), 0.0f, 0.0f, // Bottom left
-			position.x + (size.x / 2), position.y - (size.y / 2), 1.0f, 0.0f,// Bottom right
-			position.x + (size.x / 2), position.y + (size.y / 2), 1.0f, 1.0f,// Top right
-	})
+		vertices(new float[16] {
+		position.x, position.y, 0.0f, 1.0f, // Top left
+			position.x, position.y - (size.y), 0.0f, 0.0f, // Bottom left
+			position.x + (size.x), position.y - (size.y), 1.0f, 0.0f,// Bottom right
+			position.x + (size.x), position.y, 1.0f, 1.0f,// Top right
+			})
 	{
 		
 	}
@@ -30,12 +30,12 @@ struct Sprite
 	:
 	position(100.0, 100.0, 0.0),
 	size(100,100),
-	vertices(new float[16]{
-			position.x - (size.x / 2), position.y + (size.y / 2), 0.0f, 1.0f, // Top left
-			position.x - (size.x / 2), position.y - (size.y / 2), 0.0f, 0.0f, // Bottom left
-			position.x + (size.x / 2), position.y - (size.y / 2), 1.0f, 0.0f,// Bottom right
-			position.x + (size.x / 2), position.y + (size.y / 2), 1.0f, 1.0f// Top right
-	})
+		vertices(new float[16] {
+		position.x, position.y, 0.0f, 1.0f, // Top left
+			position.x, position.y - (size.y), 0.0f, 0.0f, // Bottom left
+			position.x + (size.x), position.y - (size.y), 1.0f, 0.0f,// Bottom right
+			position.x + (size.x), position.y, 1.0f, 1.0f,// Top right
+			})
 	{
 		texture.LoadTexture(path);
 	}
@@ -62,18 +62,31 @@ struct Sprite
 		UpdateVertices();
 	}
 
+	void SetPosition(const Vec2& position)
+	{
+		this->position.x = position.x;
+		this->position.y = position.y;
+		UpdateVertices();
+	}
+
+	void SetSize(const Vec2& size)
+	{
+		this->size = size;
+		UpdateVertices();
+	}
+
 	private:
 
 	void UpdateVertices()
 	{
 		float* pvert = vertices.get();
-		pvert[0] = position.x - (size.x / 2);
-		pvert[1] = position.y + (size.y / 2);
-		pvert[4] = position.x - (size.x / 2);
-		pvert[5] = position.y - (size.y / 2);
-		pvert[8] = position.x + (size.x / 2);
-		pvert[9] = position.y - (size.y / 2);
-		pvert[12] = position.x + (size.x / 2);
-		pvert[13] = position.y + (size.y / 2);
+		pvert[0] = position.x;
+		pvert[1] = position.y;
+		pvert[4] = position.x;
+		pvert[5] = position.y - (size.y);
+		pvert[8] = position.x + (size.x);
+		pvert[9] = position.y - (size.y);
+		pvert[12] = position.x + (size.x);
+		pvert[13] = position.y;
 	}
 };

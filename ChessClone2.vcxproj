@@ -155,12 +155,14 @@
     <ClCompile Include="Src\texture.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GameCode\Chess\exitButton.h" />
     <ClInclude Include="GameCode\Chess\firstscript.h" />
     <ClInclude Include="GameCode\Chess\clientSystems.h" />
     <ClInclude Include="GameCode\Chess\clientComponents.h" />
     <ClInclude Include="GameCode\Chess\playButton.h" />
     <ClInclude Include="GameCode\Chess\renderSystem.h" />
     <ClInclude Include="GameCode\Chess\clientScenes.h" />
+    <ClInclude Include="GameCode\Chess\settingsButton.h" />
     <ClInclude Include="Headers\components\button.h" />
     <ClInclude Include="Headers\components\guiComponent.h" />
     <ClInclude Include="Headers\components\script.h" />

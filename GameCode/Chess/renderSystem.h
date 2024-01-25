@@ -36,6 +36,11 @@ public:
 		this->spriteShader->use();
 		this->spriteShader->setInt("texture0", 0);
 
+		glUniformMatrix4fv(glGetUniformLocation(this->spriteShader->ID, "projection"), 1, GL_FALSE, &APL::Ortho.x.x);
+
+		this->GUIShader->use();
+		glUniformMatrix4fv(glGetUniformLocation(this->GUIShader->ID, "projection"), 1, GL_FALSE, &APL::Ortho.x.x);
+
 		this->GUIShader->setInt("bgTexture", 0);
 		this->GUIShader->setInt("hoverTexture", 1);
 		this->GUIShader->setInt("activeTexture", 2);
@@ -62,6 +67,9 @@ public:
 
 		glBindVertexArray(0);
 
+
+
+
 	}
 
 	~RenderSystem()
@@ -73,33 +81,48 @@ public:
 
 	void Operate(const float& dt) override
 	{
+		RenderSprites();
+		RenderGUI();
+
+	}
+
+
+	void RenderSprites()
+	{
 		ECSManager* manager = ECSManager::getManager();
 
 		this->spriteShader->use();
-		this->spriteShader->setInt("texture0", 0);
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		glBindVertexArray(VAO);
-		glUniformMatrix4fv(glGetUniformLocation(this->spriteShader->ID, "projection"), 1, GL_FALSE, &APL::Ortho.x.x);
+
 
 		for (auto& sprite : manager->GetPoolData<Sprite>())
 		{
 			glBindBuffer(GL_ARRAY_BUFFER, VBO);
 			glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 16, sprite.vertices.get(), GL_STATIC_DRAW);
-			glBindTexture(GL_TEXTURE_2D, sprite.texture.GetTextureData());
 			glActiveTexture(GL_TEXTURE0);
+			glBindTexture(GL_TEXTURE_2D, sprite.texture.GetTextureData());
 			
-			
-			
+
+
+
 			glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 		}
+		glDisable(GL_BLEND);
 		glBindVertexArray(0);
+	}
 
 
+	void RenderGUI()
+	{
+		ECSManager* manager = ECSManager::getManager();
 
 		this->GUIShader->use();
-		this->GUIShader->setInt("bgTexture", 0);
-		this->GUIShader->setInt("hoverTexture", 1);
-		this->GUIShader->setInt("activeTexture", 2);
-		glUniformMatrix4fv(glGetUniformLocation(this->GUIShader->ID, "projection"), 1, GL_FALSE, &APL::Ortho.x.x);
+
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		glBindVertexArray(VAO);
 
 		for (auto& button : manager->GetPoolData<Button>())
 		{
@@ -113,29 +136,41 @@ public:
 			glActiveTexture(GL_TEXTURE2);
 			glBindTexture(GL_TEXTURE_2D, button.activeTexture.GetTextureData());
 
-			if (IsInside(button.position, button.size, Vec2(APL::mousePosx, APL::mousePosy)))
+			if (IsInside(button.position, button.size, Vec2(APL::mousePosx, APL::WINDOW_HEIGHT - APL::mousePosy)))
 			{
 				this->GUIShader->setInt("state", 1);
+				button.OnActive();
 			}
 			else
 			{
 				this->GUIShader->setInt("state", 0);
 			}
-			
-			
-			//this->GUIShader->setInt("state", 2);
 
-
+			if (button.active)
+			{
+				button.active = false;
+				this->GUIShader->setInt("state", 2);
+			}
+			
 			glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 		}
 
-		//glfwSwapBuffers(APL::window);
+		
+		for (auto& button : manager->GetPoolData<Button>())
+		{
+			button.text.Render();
+		}
+
+
+
+		glDisable(GL_BLEND);
+		glBindVertexArray(0);
 	}
+
 
 private:
 	std::shared_ptr<Shader> spriteShader;
 	std::shared_ptr<Shader> GUIShader;
-	unsigned int Buff;
 	unsigned int VAO;
 	unsigned int VBO;
 	unsigned int EBO;
