@@ -2,7 +2,7 @@
 #define SCENE_H
 
 #include <components/script.h>
-#include <ecs/ECSManager.h>
+#include <ecs/ECSM.h>
 #include <signal.h>
 #include <memory>
 #include <list>
@@ -46,7 +46,7 @@ public:
 	{
 		for (auto& script : scripts)
 		{
-			script.scriptable->instance = ECSManager::getManager()->CreateEntity();
+			script.scriptable->instance = ECSM::CreateEntity();
 
 			script.scriptable->free.Connect(
 				[this](Entity t) -> void {FreeScript(t);}	);
@@ -58,7 +58,7 @@ public:
 
 	void FreeScript(Entity ent)
 	{
-		ECSManager::getManager()->FreeEntity(ent);
+		ECSM::FreeEntity(ent);
 
 	}
 
@@ -89,7 +89,7 @@ public:
 	{
 		for (auto& script : scripts)
 		{
-			ECSManager::getManager()->FreeEntity(script.scriptable->instance);
+			ECSM::FreeEntity(script.scriptable->instance);
 			script.scriptable->instance = 0;
 		}
 	}

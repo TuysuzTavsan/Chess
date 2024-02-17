@@ -6,21 +6,18 @@
 #include <ecs/ComponentManager.h>
 
 //Singleton ECSManager class that manages all ECS system.
-class ECSManager 
+class ECSM 
 {
 public:
-	
-	static ECSManager* getManager();
-	ECSManager(const ECSManager& othr) = delete;
 
-	~ECSManager();
+	ECSM() = delete;
 
-	Entity CreateEntity();
+	static Entity CreateEntity();
 
-	void FreeEntity(Entity entity);
+	static void FreeEntity(Entity entity);
 	
 	template<typename T>
-	void InsertComponent(Entity entity, T compData)
+	static void InsertComponent(Entity entity, T compData)
 	{
 		assert(entityManager.HasEntity(entity) && "Entity does not exist!");
 		componentManager.AddComponent<T>(entity, compData);
@@ -28,19 +25,19 @@ public:
 	}
 
 	template<typename T>
-	void RegisterComponent()
+	static void RegisterComponent()
 	{
 		componentManager.RegisterComponent<T>();
 	}
 
 	template<typename T>
-	T& GetComponentData(Entity entity)
+	static T& GetComponentData(Entity entity)
 	{
 		return componentManager.GetComponentData<T>(entity);
 	}
 
 	template<typename T>
-	std::vector<T>& GetPoolData()
+	static std::vector<T>& GetPoolData()
 	{
 		assert(componentManager.IsComponentDefined<T>() && "Component is not registered!");
 		ComponentPool<T>* cpool = componentManager.GetPool<T>();
@@ -49,12 +46,8 @@ public:
 
 private:
 
-	ECSManager();
-	static ECSManager* Instance;
-
-	EntityManager entityManager;
-	ComponentManager componentManager;
-
+	static EntityManager entityManager;
+	static ComponentManager componentManager;
 
 
 };

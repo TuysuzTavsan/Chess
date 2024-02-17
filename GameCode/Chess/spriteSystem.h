@@ -2,7 +2,7 @@
 #include <memory>
 #include <glad/glad.h>
 #include <ecs/System.h>
-#include <ecs/ECSManager.h>
+#include <ecs/ECSM.h>
 #include <shader.h>
 #include <text.h>
 #include <rectangle.h>

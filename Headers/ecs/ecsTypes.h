@@ -30,7 +30,7 @@ struct IComponentPool;
 template<typename T>
 class ComponentPool;
 
-class ECSManager;
+class ECSM;
 
 struct IComponentPool
 {

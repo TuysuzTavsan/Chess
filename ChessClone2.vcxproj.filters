@@ -45,7 +45,7 @@
     <ClCompile Include="Headers\ecs\ComponentManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Headers\ecs\ECSManager.cpp">
+    <ClCompile Include="Headers\ecs\ECSM.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -104,7 +104,7 @@
     <ClInclude Include="Headers\ecs\ComponentPool.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Headers\ecs\ECSManager.h">
+    <ClInclude Include="Headers\ecs\ECSM.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Headers\ecs\type_name.h">

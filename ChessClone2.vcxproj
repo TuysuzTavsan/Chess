@@ -144,7 +144,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Dependencies\Include\glad.c" />
-    <ClCompile Include="Headers\ecs\ECSManager.cpp" />
+    <ClCompile Include="Headers\ecs\ECSM.cpp" />
     <ClCompile Include="Headers\ecs\EntityManager.cpp" />
     <ClCompile Include="Headers\ecs\ComponentManager.cpp" />
     <ClCompile Include="Src\apl.cpp" />
@@ -174,7 +174,7 @@
     <ClInclude Include="Headers\apl.h" />
     <ClInclude Include="Headers\ecs\ComponentManager.h" />
     <ClInclude Include="Headers\ecs\ComponentPool.h" />
-    <ClInclude Include="Headers\ecs\ECSManager.h" />
+    <ClInclude Include="Headers\ecs\ECSM.h" />
     <ClInclude Include="Headers\ecs\System.h" />
     <ClInclude Include="Headers\ecs\type_name.h" />
     <ClInclude Include="Headers\scene.h" />

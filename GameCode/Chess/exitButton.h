@@ -2,7 +2,7 @@
 
 
 #include <scriptable.h>
-#include <ecs/ECSManager.h>
+#include <ecs/ECSM.h>
 #include <components/button.h>
 
 class ExitButton : public Scriptable
@@ -12,9 +12,9 @@ class ExitButton : public Scriptable
 	virtual void Instantiate() override
 	{
 
-		ECSManager::getManager()->InsertComponent<Button>(this->instance, Button("Exit",
+		ECSM::InsertComponent<Button>(this->instance, Button("Exit",
 			Vec2(355, 180), Vec2(90, 60), "Resources/gui/Button/Rect/Default@2x.png"));
-		Button& button = ECSManager::getManager()->GetComponentData<Button>(this->instance);
+		Button& button = ECSM::GetComponentData<Button>(this->instance);
 		button.SetHoverTexture("Resources/gui/Button/Rect/Hover@2x.png");
 		button.buttonPressed.Connect([this]() {buttonClicked(); });
 		button.SetActiveTexture("Resources/gui/Button/Rect/Active@2x.png");

@@ -1,33 +1,14 @@
-#include <ecs/ECSManager.h>
+#include <ecs/ECSM.h>
 
-ECSManager* ECSManager::Instance = nullptr;
+EntityManager ECSM::entityManager;
+ComponentManager ECSM::componentManager;
 
-ECSManager::ECSManager()
-{
-
-}
-
-ECSManager::~ECSManager()
-{
-
-}
-
-ECSManager* ECSManager::getManager()
-{
-	if (Instance == nullptr)
-	{
-		Instance = new ECSManager;
-	}
-
-	return Instance;
-}
-
-Entity ECSManager::CreateEntity()
+Entity ECSM::CreateEntity()
 {
 	return entityManager.CreateEntity();
 }
 
-void ECSManager::FreeEntity(Entity entity)
+void ECSM::FreeEntity(Entity entity)
 {
 	Signature sign = entityManager.GetSignature(entity);
 

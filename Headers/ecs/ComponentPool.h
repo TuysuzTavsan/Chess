@@ -13,7 +13,7 @@ class ECSManager;
 template<typename T>
 class ComponentPool : public IComponentPool
 {
-	friend class ECSManager;
+	friend class ECSM;
 public:
 
 	ComponentPool()

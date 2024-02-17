@@ -2,7 +2,7 @@
 #include <memory>
 #include <glad/glad.h>
 #include <ecs/System.h>
-#include <ecs/ECSManager.h>
+#include <ecs/ECSM.h>
 #include <shader.h>
 #include <apl.h>
 #include <text.h>
@@ -89,15 +89,13 @@ public:
 
 	void RenderSprites()
 	{
-		ECSManager* manager = ECSManager::getManager();
-
 		this->spriteShader->use();
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		glBindVertexArray(VAO);
 
 
-		for (auto& sprite : manager->GetPoolData<Sprite>())
+		for (auto& sprite : ECSM::GetPoolData<Sprite>())
 		{
 			glBindBuffer(GL_ARRAY_BUFFER, VBO);
 			glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 16, sprite.vertices.get(), GL_STATIC_DRAW);
@@ -116,7 +114,6 @@ public:
 
 	void RenderGUI()
 	{
-		ECSManager* manager = ECSManager::getManager();
 
 		this->GUIShader->use();
 
@@ -124,7 +121,7 @@ public:
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		glBindVertexArray(VAO);
 
-		for (auto& button : manager->GetPoolData<Button>())
+		for (auto& button : ECSM::GetPoolData<Button>())
 		{
 			glBindBuffer(GL_ARRAY_BUFFER, VBO);
 			glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 16, button.vertices.get(), GL_STATIC_DRAW);
@@ -175,7 +172,7 @@ public:
 		}
 
 		
-		for (auto& button : manager->GetPoolData<Button>())
+		for (auto& button : ECSM::GetPoolData<Button>())
 		{
 			button.text.Render();
 		}

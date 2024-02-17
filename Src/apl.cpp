@@ -99,7 +99,7 @@ void APL::InitScenes()
 
 void APL::RegisterComponents()
 {
-	RegisterClientComponents(ECSManager::getManager());
+	RegisterClientComponents();
 }
 
 void APL::RegisterSystems()
