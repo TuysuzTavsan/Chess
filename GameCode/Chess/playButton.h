@@ -24,6 +24,7 @@ class PlayButton : public Scriptable
 	void buttonClicked()
 	{
 		std::cout << "Button Clicked! Source: PlayButton\n";
+		APL::audioManager.Request("Resources/click3.wav", AudioAttribute::playLoop, 0.5f);
 	}
 
 	virtual void Update(const float& dt) override

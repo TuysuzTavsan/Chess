@@ -110,13 +110,13 @@ void Text::FitInBox(const Vec2& boxPos, const Vec2& boxSize)
 			maximum_height = this->Characters[_char].Bearing.y * this->scale;
 		}
 
-		advance = (this->Characters[_char].Advance >> 6);
+		advance = static_cast<float>(this->Characters[_char].Advance >> 6);
 	}
 
 	totalwidth += this->Characters[this->text.back()].Size.x * scale;
 
 	//experimental extra bering to make it look better in a box. j is chosen randomly instead of a fix value.
-	float extraOffsetx = (this->Characters['k'].Advance >> 6) * 2;
+	float extraOffsetx = static_cast<float>(this->Characters['k'].Advance >> 6) * 2;
 	totalwidth += extraOffsetx;
 
 	float scale1 = (boxSize.x) / totalwidth;
@@ -144,7 +144,7 @@ void Text::FitInBox(const Vec2& boxPos, const Vec2& boxSize)
 			maximum_height = this->Characters[_char].Bearing.y * this->scale;
 		}
 
-		advance = (this->Characters[_char].Advance >> 6);
+		advance = static_cast<float>(this->Characters[_char].Advance >> 6);
 	}
 	totalwidth += this->Characters[this->text.back()].Size.x * scale;
 

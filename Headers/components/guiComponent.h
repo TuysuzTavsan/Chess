@@ -13,6 +13,8 @@ struct GUIComponent
 	Vec2 position;
 	Vec2 size;
 	std::shared_ptr<float[]> vertices;
+	bool active = false;
+	bool hot = false;
 
 	virtual ~GUIComponent() = default;
 
@@ -72,4 +74,5 @@ struct GUIComponent
 
 
 	virtual void OnActive() = 0;
+	virtual void OnHot() = 0;
 };

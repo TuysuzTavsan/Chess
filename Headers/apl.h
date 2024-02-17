@@ -6,6 +6,8 @@
 #include <glfw/glfw3.h>
 #include <scene.h>
 #include <ecs/SystemManager.h>
+#include <AudioEngine/audioManager.h>
+#include <thread>
 
 /*
 Application name space which holds information and functions related to app.
@@ -21,10 +23,14 @@ namespace APL
 	extern Mat4x4 Ortho; // Orthographic matrix which used in 2D shaders.
 	extern const char* WindowTitle; // Title of the window.
 	extern GLFWwindow* window; // GLFW window object.
-	extern SceneManager* sceneManager;
+	extern SceneManager sceneManager;
 	extern SystemManager* systemManager;
 	extern double mousePosx;
 	extern double mousePosy;
+	extern AudioManager audioManager;
+	extern bool AudioFlag;
+	extern std::thread AudioThrd;
+
 	
 	//Initiliaze window and other minor stuff.
 	bool Init();
@@ -66,8 +72,11 @@ namespace APL
 	//Terminate application.
 	void Terminate();
 
-
+	void AudioFunc();
 }
+
+
+
 
 #endif // !APPLICATION_H
 

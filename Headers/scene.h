@@ -4,45 +4,56 @@
 #include <components/script.h>
 #include <ecs/ECSManager.h>
 #include <signal.h>
+#include <memory>
+#include <list>
 
 
 struct Scene
 {
-	std::list<Script*> scripts;
+	std::vector<Script> scripts;
 	Signal<void> endScene;
 
 public:
 
-	~Scene()
+	Scene() {}
+
+	~Scene() = default;
+
+	Scene(const Scene&) = delete;
+	
+	Scene(Scene&& other)
+		:
+		scripts(std::move(other.scripts)),
+		endScene(std::move(other.endScene))
 	{
-		for (auto& script : scripts)
-		{
-			delete script;
-		}
+
 	}
 
-/* 	void operator=(const Scene& other)
-	{
-		this->scripts = other.scripts;
-	} */
+	Scene& operator=(const Scene& other) = delete;
 
-	void AddScript(Script* script)
+	Scene& operator=(Scene&& other) noexcept
 	{
-		scripts.push_back(script);
+		scripts = std::move(other.scripts);
+		endScene = std::move(other.endScene);
+	}
+
+	void AddScript(Scriptable* scriptable)
+	{
+		scripts.emplace_back(Script(scriptable));
 	}
 
 	void Instantiate()
 	{
-		std::cout << "Instantiating scriptable entities!\n";
-		for (auto& scriptComponent : scripts)
+		for (auto& script : scripts)
 		{
-			scriptComponent->scriptable->instance = ECSManager::getManager()->CreateEntity();
-			scriptComponent->scriptable->free.Connect(
+			script.scriptable->instance = ECSManager::getManager()->CreateEntity();
+
+			script.scriptable->free.Connect(
 				[this](Entity t) -> void {FreeScript(t);}	);
-			scriptComponent->scriptable->endScene.Connect(
+
+			script.scriptable->endScene.Connect(
 				[this]() -> void {endScene.Emmit();}	);
 		}
-		std::cout << "Instantiating scriptable entities done!\n";
 	}
 
 	void FreeScript(Entity ent)
@@ -53,42 +64,41 @@ public:
 
 	void ScriptOnInit()
 	{
-		for (auto& scriptComponent : scripts)
+		for (auto& script : scripts)
 		{
-			scriptComponent->funcInstantiate();
+			script.funcInstantiate();
 		}
 	}
+
 	void ScriptOnUpdate(const float& dt)
 	{
-		for (auto& scriptComponent : scripts)
+		for (auto& script : scripts)
 		{
-			scriptComponent->funcUpdate(dt);
+			script.funcUpdate(dt);
 		}
 	}
 	void ScriptOnFree()
 	{
-		for (auto& scriptComponent : scripts)
+		for (auto& script : scripts)
 		{
-			scriptComponent->funcOnFree();
+			script.funcOnFree();
 		}
 	}
 
 	void FreeAll()
 	{
-		std::cout << "Cleaning scriptable entities!\n";
-		for (auto& scriptComponent : scripts)
+		for (auto& script : scripts)
 		{
-			ECSManager::getManager()->FreeEntity(scriptComponent->scriptable->instance);
-			scriptComponent->scriptable->instance = 0;
+			ECSManager::getManager()->FreeEntity(script.scriptable->instance);
+			script.scriptable->instance = 0;
 		}
-		std::cout << "Cleaning done!\n";
 	}
 };
 
 
 struct SceneManager
 {
-	std::vector<Scene*> scenes;
+	std::vector<Scene> scenes;
 	uint16_t active = 0;
 	bool isReady = false;
 	bool shouldEnd = false;
@@ -96,34 +106,22 @@ struct SceneManager
 
 public:
 
-	~SceneManager()
-	{
-		for (auto& scene : scenes)
-		{
-			delete scene;
-		}
-	}
-
-	void operator=(const SceneManager& other)
-	{
-		this->scenes = other.scenes;
-	}
-
 	//TODO do we need scene pointer for this to work?
 	//TODO do we support multiple scenes?
-	void AddScene(Scene* scene)
+	void AddScene(Scene& scene)
 	{
-		scenes.push_back(scene);
-		scene->endScene.Connect(
-			[this](){ End();}
+		scene.endScene.Connect(
+			[this]() { End(); }
 		);
+		scenes.emplace_back(std::move(scene));
+
 	}
 
 	void ReadyScenes()
 	{
-		for (auto& pScene : scenes)
+		for (auto& scene : scenes)
 		{
-			pScene->Instantiate();
+			scene.Instantiate();
 		}
 	}
 
@@ -139,13 +137,13 @@ public:
 		}
 		else if(!isReady)
 		{
-			scenes[active]->ScriptOnInit();
+			scenes[active].ScriptOnInit();
 			isReady = true;
 			return;
 		}
 		else
 		{
-			scenes[active]->ScriptOnUpdate(dt);
+			scenes[active].ScriptOnUpdate(dt);
 		}
 		
 
@@ -155,8 +153,8 @@ public:
 
 	void End()
 	{
-		scenes[active]->ScriptOnFree();
-		scenes[active]->FreeAll();
+		scenes[active].ScriptOnFree();
+		scenes[active].FreeAll();
 		isReady = false;
 
 

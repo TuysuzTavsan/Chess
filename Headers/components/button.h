@@ -30,7 +30,7 @@ struct Button : GUIComponent
 	Text text;
 	Signal<void> buttonPressed;
 	Signal<void> buttonReleased;
-	bool active = false;
+	
 
 	Button(const Button& other)
 		: GUIComponent(other)
@@ -91,18 +91,21 @@ struct Button : GUIComponent
 
 	void OnActive() override
 	{
-		std::cout << "BUTTON IS ACTIVE NOW\n";
 		switch (glfwGetMouseButton(APL::window, GLFW_MOUSE_BUTTON_LEFT))
 		{
 		case GLFW_RELEASE:
 			buttonReleased.Emmit();
 			break;
 		case GLFW_PRESS:
-			buttonPressed.Emmit();
+			if(!active)
+				buttonPressed.Emmit();
 			active = true;
 			break;
 		}
 	}
 
-
+	void OnHot() override
+	{
+		APL::audioManager.Request("Resources/rollover5.wav", AudioAttribute::playLoop, 0.5f);
+	}
 };

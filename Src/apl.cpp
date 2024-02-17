@@ -19,10 +19,13 @@ namespace APL
 	Mat4x4 Ortho;
 	const char* WindowTitle = "Chess";
 	GLFWwindow* window = nullptr;
-	SceneManager* sceneManager = new SceneManager;
+	SceneManager sceneManager;
 	SystemManager* systemManager = new SystemManager;
 	double mousePosx = 0;
 	double mousePosy = 0;
+	AudioManager audioManager;
+	bool AudioFlag = true;
+	std::thread AudioThrd(AudioFunc);
 }
 
 
@@ -75,19 +78,21 @@ bool APL::Init()
 	RegisterSystems();
 	InitScenes();
 
-	sceneManager->ReadyScenes();
+	sceneManager.ReadyScenes();
+
+	if (!audioManager.Initialize())
+		return false;
 
 	return true;
 };
 
 void APL::InitScenes()
 {
-	std::vector<Scene*> scenes;
-	InitClientScenes(scenes);
+	std::vector<Scene> scenes(InitClientScenes());
 
 	for (auto& sceneP : scenes)
 	{
-		sceneManager->AddScene(sceneP);
+		sceneManager.AddScene(sceneP);
 	}
 	
 }
@@ -160,10 +165,13 @@ void APL::SetDelta()
 	APL::lastFrame = currentFrame;
 }
 
+void AudioThread()
+{
+	APL::audioManager.Update();
+}
+
 void APL::Run()
 {
-
-	
 
 	while (!glfwWindowShouldClose(APL::window))
 	{
@@ -171,7 +179,7 @@ void APL::Run()
 		glfwGetCursorPos(APL::window, &APL::mousePosx, &APL::mousePosy);
 
 
-		sceneManager->Play(APL::deltaTime);
+		sceneManager.Play(APL::deltaTime);
 		
 
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
@@ -182,12 +190,23 @@ void APL::Run()
 		glfwSwapBuffers(APL::window);
 
 		glfwPollEvents();
-	
 	}
+	
 }
 
 void APL::Terminate()
 {
-	delete sceneManager;
+	APL::AudioFlag = false;
+	AudioThrd.join();
+	audioManager.Terminate();
 	glfwTerminate();
+}
+
+void APL::AudioFunc()
+{
+	while (APL::AudioFlag)
+	{
+		APL::audioManager.Update();
+	}
+
 }

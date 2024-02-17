@@ -8,7 +8,7 @@
 #include <text.h>
 #include <components/sprite.h>
 #include <components/button.h>
-#include <utility.h>
+#include <helper.h>
 
 class RenderSystem : public System
 {
@@ -136,21 +136,40 @@ public:
 			glActiveTexture(GL_TEXTURE2);
 			glBindTexture(GL_TEXTURE_2D, button.activeTexture.GetTextureData());
 
-			if (IsInside(button.position, button.size, Vec2(APL::mousePosx, APL::WINDOW_HEIGHT - APL::mousePosy)))
+			if (IsInside(button.position, button.size, Vec2(static_cast<float>(APL::mousePosx), static_cast<float>(APL::WINDOW_HEIGHT - APL::mousePosy))))
 			{
+				if (button.hot == false)
+				{
+					button.hot = true;
+					button.OnHot();
+				}
+					
 				this->GUIShader->setInt("state", 1);
 				button.OnActive();
+	
+				if (glfwGetMouseButton(APL::window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS)
+				{
+					button.active = true;
+				}
+				else
+				{
+					button.active = false;
+				}
+
+				if (button.active)
+				{
+					this->GUIShader->setInt("state", 2);
+				}
+
 			}
 			else
 			{
 				this->GUIShader->setInt("state", 0);
+
+				button.hot = false;
 			}
 
-			if (button.active)
-			{
-				button.active = false;
-				this->GUIShader->setInt("state", 2);
-			}
+			
 			
 			glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 		}

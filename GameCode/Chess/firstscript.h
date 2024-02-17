@@ -13,8 +13,8 @@ class MenuBackGround : public Scriptable
 
 		ECSManager::getManager()->InsertComponent<Sprite>(this->instance, Sprite("Resources/background2.jpg"));
 		Sprite& sprite = ECSManager::getManager()->GetComponentData<Sprite>(this->instance);
-		sprite.SetSize(Vec2(APL::WINDOW_WIDTH, APL::WINDOW_HEIGHT));
-		sprite.SetPosition(Vec2(0, APL::WINDOW_HEIGHT));
+		sprite.SetSize(Vec2(static_cast<float>(APL::WINDOW_WIDTH), static_cast<float>(APL::WINDOW_HEIGHT)));
+		sprite.SetPosition(Vec2(0, static_cast<float>(APL::WINDOW_HEIGHT)));
 	}
 
 	virtual void Update(const float& dt) override
