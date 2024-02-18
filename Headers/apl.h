@@ -5,6 +5,7 @@
 #include <Types/vector.h>
 #include <glfw/glfw3.h>
 #include <scene.h>
+#include <sceneManager.h>
 #include <ecs/SystemManager.h>
 #include <AudioEngine/audioManager.h>
 #include <thread>

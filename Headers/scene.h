@@ -1,30 +1,35 @@
-#ifndef SCENE_H
-#define SCENE_H
+#pragma once
 
 #include <components/script.h>
 #include <ecs/ECSM.h>
 #include <signal.h>
-#include <memory>
-#include <list>
+#include <vector>
 
+/*
+Entry point scene will always be at index 0.
+Scenes will have names to support changing between scenes from scripts.
+*/
+
+class SceneManager;
 
 struct Scene
 {
-	std::vector<Script> scripts;
-	Signal<void> endScene;
+	friend SceneManager;
 
-public:
-
-	Scene() {}
+	//Scene names must be unique.
+	Scene(std::string name)
+		:
+		name(name)
+	{}
 
 	~Scene() = default;
 
 	Scene(const Scene&) = delete;
 	
-	Scene(Scene&& other)
+	Scene(Scene&& other) noexcept
 		:
 		scripts(std::move(other.scripts)),
-		endScene(std::move(other.endScene))
+		name(std::move(other.name))
 	{
 
 	}
@@ -34,32 +39,13 @@ public:
 	Scene& operator=(Scene&& other) noexcept
 	{
 		scripts = std::move(other.scripts);
-		endScene = std::move(other.endScene);
+		name = std::move(other.name);
 	}
 
+	//Add a script from scriptable interface.
 	void AddScript(Scriptable* scriptable)
 	{
 		scripts.emplace_back(Script(scriptable));
-	}
-
-	void Instantiate()
-	{
-		for (auto& script : scripts)
-		{
-			script.scriptable->instance = ECSM::CreateEntity();
-
-			script.scriptable->free.Connect(
-				[this](Entity t) -> void {FreeScript(t);}	);
-
-			script.scriptable->endScene.Connect(
-				[this]() -> void {endScene.Emmit();}	);
-		}
-	}
-
-	void FreeScript(Entity ent)
-	{
-		ECSM::FreeEntity(ent);
-
 	}
 
 	void ScriptOnInit()
@@ -85,7 +71,20 @@ public:
 		}
 	}
 
-	void FreeAll()
+	//Instantiate entities that will hold scripts.
+	void Prepare()
+	{
+		for (auto& script : scripts)
+		{
+			script.scriptable->instance = ECSM::CreateEntity();
+
+			script.scriptable->free.Connect(
+				[this](Entity t) -> void {FreeScript(t);}	);
+		}
+	}
+
+	//Free all content that a scene has.
+	void Free()
 	{
 		for (auto& script : scripts)
 		{
@@ -93,90 +92,17 @@ public:
 			script.scriptable->instance = 0;
 		}
 	}
+
+protected:
+
+	std::vector<Script> scripts;
+	std::string name;
+
+	//Delete script.
+	void FreeScript(Entity ent)
+	{
+		ECSM::FreeEntity(ent);
+
+	}
 };
-
-
-struct SceneManager
-{
-	std::vector<Scene> scenes;
-	uint16_t active = 0;
-	bool isReady = false;
-	bool shouldEnd = false;
-	bool shouldUpdate = true;
-
-public:
-
-	//TODO do we need scene pointer for this to work?
-	//TODO do we support multiple scenes?
-	void AddScene(Scene& scene)
-	{
-		scene.endScene.Connect(
-			[this]() { End(); }
-		);
-		scenes.emplace_back(std::move(scene));
-
-	}
-
-	void ReadyScenes()
-	{
-		for (auto& scene : scenes)
-		{
-			scene.Instantiate();
-		}
-	}
-
-	void Play(const float& dt)
-	{
-		//No need to assert now.
-		//TODO but maybe we need if we redisgne this class.
-		//assert(active < scenes.size() && "Playing null scene!");
-
-		if(!shouldUpdate)
-		{
-			return;
-		}
-		else if(!isReady)
-		{
-			scenes[active].ScriptOnInit();
-			isReady = true;
-			return;
-		}
-		else
-		{
-			scenes[active].ScriptOnUpdate(dt);
-		}
-		
-
-		
-		
-	}
-
-	void End()
-	{
-		scenes[active].ScriptOnFree();
-		scenes[active].FreeAll();
-		isReady = false;
-
-
-		// Scene just ended and we need to prepare new scene if there is one.
-		//check if there is any scene waiting
-		active++;
-		if(scenes.size() > active)
-		{
-			return;
-		}
-		else
-		{
-			std::cout << "No scene to play!\n";
-			shouldUpdate = false;
-		}
-		
-	}
-
-
-};
-
-
-
-#endif // !SCENE_H
 

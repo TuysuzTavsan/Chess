@@ -168,6 +168,7 @@
     <ClInclude Include="Headers\components\guiComponent.h" />
     <ClInclude Include="Headers\components\script.h" />
     <ClInclude Include="Headers\ecs\SystemManager.h" />
+    <ClInclude Include="Headers\sceneManager.h" />
     <ClInclude Include="Headers\scriptable.h" />
     <ClInclude Include="Headers\components\sprite.h" />
     <ClInclude Include="Headers\drawable2D.h" />

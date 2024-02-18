@@ -78,7 +78,7 @@ bool APL::Init()
 	RegisterSystems();
 	InitScenes();
 
-	sceneManager.ReadyScenes();
+	sceneManager.StartScene("main");
 
 	if (!audioManager.Initialize())
 		return false;
@@ -179,7 +179,7 @@ void APL::Run()
 		glfwGetCursorPos(APL::window, &APL::mousePosx, &APL::mousePosy);
 
 
-		sceneManager.Play(APL::deltaTime);
+		sceneManager.Update(APL::deltaTime);
 		
 
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
