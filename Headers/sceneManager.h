@@ -35,7 +35,7 @@ public:
 	void StartScene(const std::string& _name)
 	{
 		//search
-		auto it = std::find_if(inactiveScenes.begin(), inactiveScenes.end(), [&_name](Scene e) -> bool {return e.name == _name; });
+		auto it = std::find_if(inactiveScenes.begin(), inactiveScenes.end(), [&_name](const Scene& e) -> bool {return e.name == _name; });
 
 		//Throw if not found.
 		if (it == inactiveScenes.end())
@@ -48,7 +48,7 @@ public:
 		it->ScriptOnInit();
 
 		//move scene to active vector.
-		activeScenes.emplace_back(std::move(it));
+		activeScenes.emplace_back(std::move(*it));
 		inactiveScenes.erase(it);
 
 	}
@@ -57,7 +57,7 @@ public:
 	void StopScene(const std::string& _name)
 	{
 		//search
-		auto it = std::find_if(activeScenes.begin(), activeScenes.end(), [&_name](Scene e) -> bool {return e.name == _name; });
+		auto it = std::find_if(activeScenes.begin(), activeScenes.end(), [&_name](const Scene& e) -> bool {return e.name == _name; });
 
 		//Throw if not found.
 		if (it == activeScenes.end())

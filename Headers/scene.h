@@ -40,6 +40,8 @@ struct Scene
 	{
 		scripts = std::move(other.scripts);
 		name = std::move(other.name);
+
+		return *this;
 	}
 
 	//Add a script from scriptable interface.
