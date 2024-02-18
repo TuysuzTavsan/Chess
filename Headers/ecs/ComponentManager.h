@@ -30,10 +30,11 @@ public:
 		std::string str(type_name<T>());
 		assert(ID + 1 < MAX_COMPONENT && "Too much components!");
 		assert(!IsComponentDefined<T>() && "Component already registered!");
-		ComponentID id = ++ID;;
+		ComponentID id = ID;
 		ComponentPool<T>* pool = new ComponentPool<T>();
 		ComponentPoolReacher.insert({ id, static_cast<IComponentPool*>(pool) });
 		ComponentList.insert({ str,id });
+		ID++;
 	}
 
 	template<typename T>

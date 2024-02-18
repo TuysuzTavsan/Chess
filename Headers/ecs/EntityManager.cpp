@@ -16,10 +16,11 @@ Entity EntityManager::CreateEntity()
 {
 	assert(ID + 1 < MAX_ENTITES && "Too much entities!");
 
-	Entity temp = ++ID;
+	Entity temp = ID;
 	Signature sign;
 	EntityPair pair(temp, sign);
 	LivingEntites.insert(pair);
+	ID++;
 	return temp;
 }
 

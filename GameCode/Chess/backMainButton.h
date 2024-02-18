@@ -4,14 +4,14 @@
 #include <ecs/ECSM.h>
 #include <components/button.h>
 
-class SettingsButton : public Scriptable
+class backMainButton : public Scriptable
 {
 
 	virtual void Instantiate() override
 	{
-		
-		ECSM::InsertComponent<Button>(this->instance, Button("Settings",
-			Vec2(310, 270), Vec2(180, 80), "Resources/gui/Button/Rect/Default@2x.png"));
+
+		ECSM::InsertComponent<Button>(this->instance, Button("Main Menu",
+			Vec2(200, 100), Vec2(180, 80), "Resources/gui/Button/Rect/Default@2x.png"));
 		Button& button = ECSM::GetComponentData<Button>(this->instance);
 		button.SetHoverTexture("Resources/gui/Button/Rect/Hover@2x.png");
 		button.buttonPressed.Connect([this]() {buttonClicked(); });
@@ -25,9 +25,9 @@ class SettingsButton : public Scriptable
 		APL::audioManager.Request("Resources/click3.wav", AudioAttribute::playLoop, 0.5f);
 
 
+		APL::sceneManager.Request("settings", SceneRequestType::stop);
+		APL::sceneManager.Request("main", SceneRequestType::start);
 		
-		APL::sceneManager.Request("main", SceneRequestType::stop);
-		APL::sceneManager.Request("settings", SceneRequestType::start);
 
 	}
 

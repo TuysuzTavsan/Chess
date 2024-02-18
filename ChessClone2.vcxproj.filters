@@ -89,7 +89,7 @@
     <ClInclude Include="Headers\platform.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GameCode\Chess\firstscript.h">
+    <ClInclude Include="GameCode\Chess\menuBackground.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Headers\ecs\ecsTypes.h">
@@ -153,6 +153,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Headers\sceneManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameCode\Chess\settingsBackground.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameCode\Chess\backMainButton.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

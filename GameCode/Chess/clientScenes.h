@@ -1,9 +1,12 @@
 #pragma once
 #include <scene.h>
-#include <Chess/firstscript.h>
+#include <Chess/menuBackground.h>
 #include <Chess/playButton.h>
 #include <Chess/settingsButton.h>
 #include <Chess/exitButton.h>
+#include <Chess/settingsBackground.h>
+#include <Chess/backMainButton.h>
+
 #include <vector>
 #include <memory>
 
@@ -22,6 +25,16 @@ std::vector<Scene> InitClientScenes()
 	ADD_ENTITY(main, SettingsButton);
 
 	PUSH_SCENE(scenes, main);
+
+
+	NEW_SCENE(scenes, settings);
+
+	ADD_ENTITY(settings, SettingsBackground);
+	ADD_ENTITY(settings, backMainButton);
+
+	PUSH_SCENE(scenes, settings);
+
+
 
 	return scenes;
 }

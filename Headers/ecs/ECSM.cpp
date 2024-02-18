@@ -17,7 +17,7 @@ void ECSM::FreeEntity(Entity entity)
 		if (sign.test(i))
 		{
 			//Entity has component.
-			IComponentPool* pool = componentManager.GetPoolbyID(sign[i]);
+			IComponentPool* pool = componentManager.GetPoolbyID(i);
 			pool->EraseComponent(entity);
 			entityManager.SetSignature(entity, i, false);
 		}

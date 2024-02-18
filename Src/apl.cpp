@@ -78,7 +78,7 @@ bool APL::Init()
 	RegisterSystems();
 	InitScenes();
 
-	sceneManager.StartScene("main");
+	sceneManager.Request("main", SceneRequestType::start);
 
 	if (!audioManager.Initialize())
 		return false;

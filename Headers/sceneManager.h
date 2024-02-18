@@ -10,6 +10,26 @@ SceneManager is a top level class that manages scenes.
 ScenesManager can be accessed within a script to support scene changing and instancing.
 */
 
+enum SceneRequestType
+{
+	start,
+	stop
+};
+
+struct SceneRequest
+{
+	SceneRequest(const std::string& _name, SceneRequestType _type)
+		:
+		name{_name},
+		type{_type}
+	{
+		
+	}
+
+	std::string name;
+	SceneRequestType type;
+};
+
 class SceneManager
 {
 public:
@@ -19,10 +39,37 @@ public:
 
 	void Update(const float dt)
 	{
+		//Process scene requests before running update on scripts.
+		for (auto it = requests.begin(); it != requests.end();)
+		{
+
+			if (it->type == SceneRequestType::stop)
+			{
+				StopScene(it->name);
+			}
+			
+			if (it->type == SceneRequestType::start)
+			{
+				StartScene(it->name);
+			}
+
+			//Request is processed, remove it from the vector.
+			it = requests.erase(it);
+
+		}
+
+		//Run update on scripts.
 		for (auto& scene : activeScenes)
 		{
 			scene.ScriptOnUpdate(dt);
 		}
+
+	}
+
+	//Request a scene to play or stop. Scene names must be unique.
+	void Request(const std::string& _name, SceneRequestType _type)
+	{
+		requests.emplace_back(SceneRequest(_name, _type));
 	}
 
 	//Add a scene to the inActiveScene pool.
@@ -30,6 +77,8 @@ public:
 	{
 		inactiveScenes.emplace_back(std::move(scene));
 	}
+
+private:
 
 	//Start playing specified named scene.
 	void StartScene(const std::string& _name)
@@ -42,7 +91,6 @@ public:
 		{
 			throw std::logic_error("Can not find specified scene name!");
 		}
-
 		//init
 		it->Prepare();
 		it->ScriptOnInit();
@@ -72,12 +120,13 @@ public:
 		it->Free();
 
 		//erase from active vector.
+		inactiveScenes.emplace_back(std::move(*it));
 		activeScenes.erase(it);
 	}
 
-private:
-
 	std::vector<Scene> inactiveScenes;
 	std::vector<Scene> activeScenes;
+	std::vector<SceneRequest> requests;
+	
 
 };

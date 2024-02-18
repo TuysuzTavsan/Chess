@@ -6,7 +6,6 @@
 
 class MenuBackGround : public Scriptable
 {
-	int x = 0;
 
 	virtual void Instantiate() override
 	{
