@@ -3,6 +3,7 @@
 #include <ecs/ecsTypes.h>
 #include <vector>
 #include <ecs/System.h>
+#include <memory>
 
 class SystemManager
 {
@@ -11,21 +12,21 @@ public:
 	SystemManager() = default;
 	~SystemManager() = default;
 
-	void AddSystem(System* system)
+	void AddSystem(std::unique_ptr<System>&& system)
 	{
-		systems.push_back(system);
+		systems.emplace_back(std::move(system));
 	}
 
 	void Update(const float& dt)
 	{
-		for (auto system : systems)
+		for (auto& system : systems)
 		{
-			system->Operate(dt);
+			(system.get())->Operate(dt);
 		}
 	}
 
 private:
 
-	std::vector<System*> systems;
+	std::vector<std::unique_ptr<System>> systems;
 
 };

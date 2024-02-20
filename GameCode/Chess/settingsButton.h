@@ -13,7 +13,7 @@ class SettingsButton : public Scriptable
 		ECSM::InsertComponent<Button>(this->instance, Button("Settings",
 			Vec2(310, 270), Vec2(180, 80), "Resources/gui/Button/Rect/Default@2x.png"));
 		Button& button = ECSM::GetComponentData<Button>(this->instance);
-		button.SetHoverTexture("Resources/gui/Button/Rect/Hover@2x.png");
+		button.SetHotTexture("Resources/gui/Button/Rect/Hover@2x.png");
 		button.buttonPressed.Connect([this]() {buttonClicked(); });
 		button.SetActiveTexture("Resources/gui/Button/Rect/Active@2x.png");
 

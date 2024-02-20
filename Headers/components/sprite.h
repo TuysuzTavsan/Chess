@@ -3,7 +3,7 @@
 #include <memory>
 #include <texture.h>
 
-#include <components/guiComponent.h>
+#include <components/guiElement.h>
 
 struct Sprite
 {

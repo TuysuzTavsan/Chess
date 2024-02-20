@@ -3,6 +3,9 @@
 #include <string>
 #include <memory>
 
+
+//TODO: Check if this class needs to have copy/move assignment constructor.
+
 class Texture
 {
     std::shared_ptr<unsigned int> texture;

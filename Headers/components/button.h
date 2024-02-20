@@ -7,7 +7,7 @@
 #include <signal.h>
 #include <texture.h>
 
-#include <components/guiComponent.h>
+#include <components/guiElement.h>
 
 //todo fix this
 #include <text.h>
@@ -25,21 +25,22 @@ Text will be aligned to start from middle and left point of the button always.
 
 
 
-struct Button : GUIComponent
+struct Button : GUIElement
 {
 	Text text;
 	Signal<void> buttonPressed;
 	Signal<void> buttonReleased;
+	bool pressed = false;
 	
 
 	Button(const Button& other)
-		: GUIComponent(other)
+		: GUIElement(other)
 	{
 		this->text = other.text;
 	}
 
 	Button(const std::string& text, const Vec2& position, const Vec2& size, std::string bgTexture)
-		: GUIComponent(size, position)
+		: GUIElement(size, position)
 	{
 		this->text.SetText(text.c_str());
 		this->bgTexture.LoadTexture(bgTexture);
@@ -48,26 +49,26 @@ struct Button : GUIComponent
 		
 	}
 
-	Button(const std::string& text, const Vec2& position, const Vec2& size, std::string bgTexture, std::string hoverTexture)
-		: GUIComponent()
+	Button(const std::string& text, const Vec2& position, const Vec2& size, std::string bgTexture, std::string hotTexture)
+		: GUIElement()
 	{
 		this->size = size;
 		this->text.SetText(text.c_str());
 		this->position = position;
 		this->bgTexture.LoadTexture(bgTexture);
-		this->hoverTexture.LoadTexture(hoverTexture);
+		this->hotTexture.LoadTexture(hotTexture);
 		this->text.FitInBox(this->position, this->size);
 		this->UpdateVertices();
 	}
 
-	Button(const std::string& text, const Vec2& position, const Vec2& size, std::string bgTexture, std::string hoverTexture, std::string activeTexture)
-		: GUIComponent()
+	Button(const std::string& text, const Vec2& position, const Vec2& size, std::string bgTexture, std::string hotTexture, std::string activeTexture)
+		: GUIElement()
 	{
 		this->size = size;
 		this->text.SetText(text.c_str());
 		this->position = position;
 		this->bgTexture.LoadTexture(bgTexture);
-		this->hoverTexture.LoadTexture(hoverTexture);
+		this->hotTexture.LoadTexture(hotTexture);
 		this->activeTexture.LoadTexture(activeTexture);
 		this->text.FitInBox(this->position, this->size);
 		this->UpdateVertices();
@@ -89,22 +90,26 @@ struct Button : GUIComponent
 		this->text.SetSize(size);
 	}
 
-	void OnActive() override
+	void OnHot() override
 	{
 		switch (glfwGetMouseButton(APL::window, GLFW_MOUSE_BUTTON_LEFT))
 		{
 		case GLFW_RELEASE:
 			buttonReleased.Emmit();
+			pressed = false;
 			break;
 		case GLFW_PRESS:
-			if(!active)
+			if (!pressed)
+			{
 				buttonPressed.Emmit();
-			active = true;
+				pressed = true;
+			}
 			break;
+		default: pressed = false;
 		}
 	}
 
-	void OnHot() override
+	void OnFocusEntered() override
 	{
 		APL::audioManager.Request("Resources/rollover5.wav", AudioAttribute::playLoop, 0.5f);
 	}

@@ -140,7 +140,7 @@
     <ClInclude Include="Headers\components\button.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Headers\components\guiComponent.h">
+    <ClInclude Include="Headers\components\guiElement.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Headers\helper.h">
@@ -159,6 +159,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GameCode\Chess\backMainButton.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Headers\guiManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

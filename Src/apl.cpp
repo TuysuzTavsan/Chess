@@ -20,7 +20,7 @@ namespace APL
 	const char* WindowTitle = "Chess";
 	GLFWwindow* window = nullptr;
 	SceneManager sceneManager;
-	SystemManager* systemManager = new SystemManager;
+	SystemManager systemManager;
 	double mousePosx = 0;
 	double mousePosy = 0;
 	AudioManager audioManager;
@@ -185,7 +185,7 @@ void APL::Run()
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		systemManager->Update(APL::deltaTime);
+		systemManager.Update(APL::deltaTime);
 
 		glfwSwapBuffers(APL::window);
 

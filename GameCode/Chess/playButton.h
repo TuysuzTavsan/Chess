@@ -15,7 +15,7 @@ class PlayButton : public Scriptable
 		ECSM::InsertComponent<Button>(this->instance, Button("PLAY",
 			Vec2(300, 380), Vec2(200, 100), "Resources/gui/Button/Rect/Default@2x.png"));
 		Button& button = ECSM::GetComponentData<Button>(this->instance);
-		button.SetHoverTexture("Resources/gui/Button/Rect/Hover@2x.png");
+		button.SetHotTexture("Resources/gui/Button/Rect/Hover@2x.png");
 		button.buttonPressed.Connect([this]() {buttonClicked(); });
 		button.SetActiveTexture("Resources/gui/Button/Rect/Active@2x.png");
 		

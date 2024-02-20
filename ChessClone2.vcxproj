@@ -167,9 +167,10 @@
     <ClInclude Include="GameCode\Chess\settingsBackground.h" />
     <ClInclude Include="GameCode\Chess\settingsButton.h" />
     <ClInclude Include="Headers\components\button.h" />
-    <ClInclude Include="Headers\components\guiComponent.h" />
+    <ClInclude Include="Headers\components\guiElement.h" />
     <ClInclude Include="Headers\components\script.h" />
     <ClInclude Include="Headers\ecs\SystemManager.h" />
+    <ClInclude Include="Headers\guiManager.h" />
     <ClInclude Include="Headers\sceneManager.h" />
     <ClInclude Include="Headers\scriptable.h" />
     <ClInclude Include="Headers\components\sprite.h" />

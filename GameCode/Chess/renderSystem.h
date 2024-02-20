@@ -51,7 +51,6 @@ public:
 
 		glBindVertexArray(VAO);
 
-		
 
 		glBindBuffer(GL_ARRAY_BUFFER, this->VBO);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
@@ -129,32 +128,29 @@ public:
 			glActiveTexture(GL_TEXTURE0);
 			glBindTexture(GL_TEXTURE_2D, button.bgTexture.GetTextureData());
 			glActiveTexture(GL_TEXTURE1);
-			glBindTexture(GL_TEXTURE_2D, button.hoverTexture.GetTextureData());
+			glBindTexture(GL_TEXTURE_2D, button.hotTexture.GetTextureData());
 			glActiveTexture(GL_TEXTURE2);
 			glBindTexture(GL_TEXTURE_2D, button.activeTexture.GetTextureData());
 
 			if (IsInside(button.position, button.size, Vec2(static_cast<float>(APL::mousePosx), static_cast<float>(APL::WINDOW_HEIGHT - APL::mousePosy))))
 			{
-				if (button.hot == false)
+				button.hot = true;
+
+				if (button.isAlreadyFocused == false)
 				{
 					button.hot = true;
-					button.OnHot();
-				}
+					button.isAlreadyFocused = true;
+					button.OnFocusEntered();
 					
+				}
+				
+				button.OnHot();
+				
 				this->GUIShader->setInt("state", 1);
-				button.OnActive();
-	
-				if (glfwGetMouseButton(APL::window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS)
-				{
-					button.active = true;
-				}
-				else
-				{
-					button.active = false;
-				}
 
-				if (button.active)
+				if (button.pressed)
 				{
+
 					this->GUIShader->setInt("state", 2);
 				}
 
@@ -163,6 +159,7 @@ public:
 			{
 				this->GUIShader->setInt("state", 0);
 
+				button.isAlreadyFocused = false;
 				button.hot = false;
 			}
 

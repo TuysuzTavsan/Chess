@@ -25,7 +25,7 @@ namespace APL
 	extern const char* WindowTitle; // Title of the window.
 	extern GLFWwindow* window; // GLFW window object.
 	extern SceneManager sceneManager;
-	extern SystemManager* systemManager;
+	extern SystemManager systemManager;
 	extern double mousePosx;
 	extern double mousePosy;
 	extern AudioManager audioManager;
