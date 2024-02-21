@@ -149,6 +149,7 @@
     <ClCompile Include="Headers\ecs\ComponentManager.cpp" />
     <ClCompile Include="Src\apl.cpp" />
     <ClCompile Include="Src\drawable2D.cpp" />
+    <ClCompile Include="Src\guiMannager.cpp" />
     <ClCompile Include="Src\main.cpp" />
     <ClCompile Include="Src\rectangle.cpp" />
     <ClCompile Include="Src\shader.cpp" />
@@ -194,6 +195,7 @@
     <ClInclude Include="Headers\ecs\EntityManager.h" />
     <ClInclude Include="Headers\ecs\ecsTypes.h" />
     <ClInclude Include="Headers\helper.h" />
+    <ClInclude Include="Headers\window.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ShaderSrc\GUIFragment.glsl" />

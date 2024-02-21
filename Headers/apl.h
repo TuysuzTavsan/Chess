@@ -9,6 +9,7 @@
 #include <ecs/SystemManager.h>
 #include <AudioEngine/audioManager.h>
 #include <thread>
+#include <window.h>
 
 /*
 Application name space which holds information and functions related to app.
@@ -23,7 +24,7 @@ namespace APL
 	extern unsigned int WINDOW_HEIGHT; // Window height.
 	extern Mat4x4 Ortho; // Orthographic matrix which used in 2D shaders.
 	extern const char* WindowTitle; // Title of the window.
-	extern GLFWwindow* window; // GLFW window object.
+	extern Window window; // GLFW window object.
 	extern SceneManager sceneManager;
 	extern SystemManager systemManager;
 	extern double mousePosx;

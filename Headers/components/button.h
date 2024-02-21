@@ -92,7 +92,7 @@ struct Button : GUIElement
 
 	void OnHot() override
 	{
-		switch (glfwGetMouseButton(APL::window, GLFW_MOUSE_BUTTON_LEFT))
+		switch (glfwGetMouseButton(APL::window.get(), GLFW_MOUSE_BUTTON_LEFT))
 		{
 		case GLFW_RELEASE:
 			buttonReleased.Emmit();

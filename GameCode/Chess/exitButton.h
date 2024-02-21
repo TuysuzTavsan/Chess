@@ -22,7 +22,7 @@ class ExitButton : public Scriptable
 	void buttonClicked()
 	{
 		std::cout << "Button Clicked! Source: ExitButton\n";
-		glfwSetWindowShouldClose(APL::window, GLFW_TRUE);
+		glfwSetWindowShouldClose(APL::window.get(), GLFW_TRUE);
 	}
 
 	virtual void Update(const float& dt) override

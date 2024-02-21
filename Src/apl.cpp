@@ -18,7 +18,7 @@ namespace APL
 	unsigned int WINDOW_HEIGHT = 600;
 	Mat4x4 Ortho;
 	const char* WindowTitle = "Chess";
-	GLFWwindow* window = nullptr;
+	Window window;
 	SceneManager sceneManager;
 	SystemManager systemManager;
 	double mousePosx = 0;
@@ -47,18 +47,35 @@ bool APL::Init()
 	glfwWindowHint(GLFW_SAMPLES, 4);
 
 
-	window = glfwCreateWindow(APL::WINDOW_WIDTH, APL::WINDOW_HEIGHT, APL::WindowTitle, NULL, NULL);
+	window.CreateWindow(APL::WINDOW_WIDTH, APL::WINDOW_HEIGHT, APL::WindowTitle, NULL, NULL);
 
-	if (!window)
+	Window tempwindow1 = window;
+
+	{
+		Window tempwindow3 = tempwindow1;
+
+		{
+
+			Window tempwindow7 = window;
+		}
+
+	}
+
+	if (!window.get())
 	{
 		std::cout << "Failed to create GLFW window!\n";
 		glfwTerminate();
 		return false;
 	}
 
-	glfwMakeContextCurrent(window);
-	glfwSetFramebufferSizeCallback(APL::window, APL::framebuffer_size_callback);
-	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+	GLFWimage images[1];
+	images[0].pixels = stbi_load("Resources/icon.jpg", &images[0].width, &images[0].height, 0, 4); //rgba channels 
+	glfwSetWindowIcon(window.get(), 1, images);
+	stbi_image_free(images[0].pixels);
+
+	glfwMakeContextCurrent(window.get());
+	glfwSetFramebufferSizeCallback(APL::window.get(), APL::framebuffer_size_callback);
+	glfwSetInputMode(window.get(), GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
 	{
@@ -173,10 +190,10 @@ void AudioThread()
 void APL::Run()
 {
 
-	while (!glfwWindowShouldClose(APL::window))
+	while (!glfwWindowShouldClose(APL::window.get()))
 	{
 		SetDelta();
-		glfwGetCursorPos(APL::window, &APL::mousePosx, &APL::mousePosy);
+		glfwGetCursorPos(APL::window.get(), &APL::mousePosx, &APL::mousePosy);
 
 
 		sceneManager.Update(APL::deltaTime);
@@ -187,7 +204,7 @@ void APL::Run()
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		systemManager.Update(APL::deltaTime);
 
-		glfwSwapBuffers(APL::window);
+		glfwSwapBuffers(APL::window.get());
 
 		glfwPollEvents();
 	}
