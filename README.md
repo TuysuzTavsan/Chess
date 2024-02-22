@@ -2,6 +2,7 @@
 Main goal of this project is to learn how to manage complex project, learning how to design complex systems along the way. <br />
 This project is not yet complete. <br />
 This project does not have a build system yet. <br />
+I do not own anything in Resources Folder. They are for testing temporarily.
 
 What I have implemented so far: <br />
 ECS system. <br />
