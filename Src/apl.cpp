@@ -49,18 +49,6 @@ bool APL::Init()
 
 	window.CreateWindow(APL::WINDOW_WIDTH, APL::WINDOW_HEIGHT, APL::WindowTitle, NULL, NULL);
 
-	Window tempwindow1 = window;
-
-	{
-		Window tempwindow3 = tempwindow1;
-
-		{
-
-			Window tempwindow7 = window;
-		}
-
-	}
-
 	if (!window.get())
 	{
 		std::cout << "Failed to create GLFW window!\n";
@@ -69,7 +57,7 @@ bool APL::Init()
 	}
 
 	GLFWimage images[1];
-	images[0].pixels = stbi_load("Resources/icon.jpg", &images[0].width, &images[0].height, 0, 4); //rgba channels 
+	images[0].pixels = stbi_load("Resources/icon2.jpg", &images[0].width, &images[0].height, 0, 4); //rgba channels 
 	glfwSetWindowIcon(window.get(), 1, images);
 	stbi_image_free(images[0].pixels);
 

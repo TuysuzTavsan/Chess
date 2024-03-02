@@ -6,19 +6,5 @@ Sprite component
 button component
 text component
 
-
-script system needs to run on scripts and instantiates them? Maybe a seperate manager that works with scenes? === done
-
-
-
-
-
-
-
 2024 TODO: FINISH THIS AND MOVE ON WITH YOUR CODING LIFE!
-TODO: fix endscene signal. 
-TODO: OPENAL ?
-
-
-NEREDE KALDIM: en son button için component yapıyordum render kısmı kaldı genel olarak button structı bitti. fare pozisyonlarını da ayrı x ayrı y olarak APL 
-namespace ekledim.
+UI system.

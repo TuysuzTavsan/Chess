@@ -16,9 +16,7 @@ public:
 
 	RenderSystem()
 		:
-		spriteShader(new Shader("ShaderSrc/spriteVertex.glsl", "ShaderSrc/spriteFragment.glsl")),
-		GUIShader(new Shader("ShaderSrc/GUIVertex.glsl", "ShaderSrc/GUIFragment.glsl"))
-		
+		spriteShader(new Shader("ShaderSrc/spriteVertex.glsl", "ShaderSrc/spriteFragment.glsl"))
 	{
 
 		indices = (new unsigned int[6] {
@@ -37,13 +35,6 @@ public:
 		this->spriteShader->setInt("texture0", 0);
 
 		glUniformMatrix4fv(glGetUniformLocation(this->spriteShader->ID, "projection"), 1, GL_FALSE, &APL::Ortho.x.x);
-
-		this->GUIShader->use();
-		glUniformMatrix4fv(glGetUniformLocation(this->GUIShader->ID, "projection"), 1, GL_FALSE, &APL::Ortho.x.x);
-
-		this->GUIShader->setInt("bgTexture", 0);
-		this->GUIShader->setInt("hoverTexture", 1);
-		this->GUIShader->setInt("activeTexture", 2);
 
 		glGenVertexArrays(1, &VAO);
 		glGenBuffers(1, &VBO);
@@ -81,8 +72,6 @@ public:
 	void Operate(const float& dt) override
 	{
 		RenderSprites();
-		RenderGUI();
-
 	}
 
 
@@ -111,79 +100,8 @@ public:
 	}
 
 
-	void RenderGUI()
-	{
-
-		this->GUIShader->use();
-
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		glBindVertexArray(VAO);
-
-		for (auto& button : ECSM::GetPoolData<Button>())
-		{
-			glBindBuffer(GL_ARRAY_BUFFER, VBO);
-			glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 16, button.vertices.get(), GL_STATIC_DRAW);
-
-			glActiveTexture(GL_TEXTURE0);
-			glBindTexture(GL_TEXTURE_2D, button.bgTexture.GetTextureData());
-			glActiveTexture(GL_TEXTURE1);
-			glBindTexture(GL_TEXTURE_2D, button.hotTexture.GetTextureData());
-			glActiveTexture(GL_TEXTURE2);
-			glBindTexture(GL_TEXTURE_2D, button.activeTexture.GetTextureData());
-
-			if (IsInside(button.position, button.size, Vec2(static_cast<float>(APL::mousePosx), static_cast<float>(APL::WINDOW_HEIGHT - APL::mousePosy))))
-			{
-				button.hot = true;
-
-				if (button.isAlreadyFocused == false)
-				{
-					button.hot = true;
-					button.isAlreadyFocused = true;
-					button.OnFocusEntered();
-					
-				}
-				
-				button.OnHot();
-				
-				this->GUIShader->setInt("state", 1);
-
-				if (button.pressed)
-				{
-
-					this->GUIShader->setInt("state", 2);
-				}
-
-			}
-			else
-			{
-				this->GUIShader->setInt("state", 0);
-
-				button.isAlreadyFocused = false;
-				button.hot = false;
-			}
-
-			
-			
-			glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-		}
-
-		
-		for (auto& button : ECSM::GetPoolData<Button>())
-		{
-			button.text.Render();
-		}
-
-
-
-		glDisable(GL_BLEND);
-		glBindVertexArray(0);
-	}
-
-
 private:
 	std::shared_ptr<Shader> spriteShader;
-	std::shared_ptr<Shader> GUIShader;
 	unsigned int VAO;
 	unsigned int VBO;
 	unsigned int EBO;

@@ -117,7 +117,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(ProjectDir)\Dependencies\Lib\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)\Dependencies\Lib\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>freetyped.lib;glfw3.lib;AudioEngine.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -139,17 +139,19 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(ProjectDir)\Dependencies\Lib\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>freetype.lib;glfw3.lib;AudioEngine.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>freetyped.lib;glfw3.lib;AudioEngine.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Dependencies\Include\glad.c" />
+    <ClCompile Include="GameCode\Chess\guiSystem.cpp" />
     <ClCompile Include="Headers\ecs\ECSM.cpp" />
     <ClCompile Include="Headers\ecs\EntityManager.cpp" />
     <ClCompile Include="Headers\ecs\ComponentManager.cpp" />
     <ClCompile Include="Src\apl.cpp" />
     <ClCompile Include="Src\drawable2D.cpp" />
     <ClCompile Include="Src\guiMannager.cpp" />
+    <ClCompile Include="Src\helper.cpp" />
     <ClCompile Include="Src\main.cpp" />
     <ClCompile Include="Src\rectangle.cpp" />
     <ClCompile Include="Src\shader.cpp" />
@@ -159,6 +161,7 @@
   <ItemGroup>
     <ClInclude Include="GameCode\Chess\backMainButton.h" />
     <ClInclude Include="GameCode\Chess\exitButton.h" />
+    <ClInclude Include="GameCode\Chess\guiSystem.h" />
     <ClInclude Include="GameCode\Chess\menuBackground.h" />
     <ClInclude Include="GameCode\Chess\clientSystems.h" />
     <ClInclude Include="GameCode\Chess\clientComponents.h" />
