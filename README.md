@@ -1,3 +1,5 @@
+*This project is postponed due to me developing a game. This project is close to finish, but I think I wont be learning new stuff from this anymore so I moved on for now.*
+
 # Chess <br />
 Main goal of this project is to learn how to manage complex project, learning how to design complex systems along the way. <br />
 This project is not yet complete. <br />
